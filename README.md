@@ -1,6 +1,6 @@
 # CPSC471-Final-Project
 
-Group 22
+Group 22 - Airline Booking System with Express Shipping
 
 # Contributers:
 Sukriti Sharma, email: sukriti.sharma@ucalgary.ca
