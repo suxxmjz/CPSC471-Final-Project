@@ -72,20 +72,9 @@
 				{
 					$dep_date=trim($_POST['dep_date']);
 				}
-				if(empty($_POST['no_of_pass']))
-				{
-					$data_missing[]='No. of Passengers';
-				}
-				else
-				{
-					$no_of_pass=trim($_POST['no_of_pass']);
-				}
 
 				if(empty($data_missing))
 				{
-					$_SESSION['no_of_pass']=$no_of_pass;
-					$count=1;
-					$_SESSION['count']=$count;
 					$_SESSION['journey_date']=$dep_date;
 					require_once('Database Connection file/mysqli_connect.php');
 						$query="SELECT FlightNumber,DepTime,StartTime,EndTime,Destination,Source FROM flight where Source=? and Destination=? and DepTime=?";
@@ -99,7 +88,7 @@
 							echo "<h3>No flights are available !</h3>";
 						}
 						else
-						{
+						{	
 							echo "<form action=\"book_tickets2.php\" method=\"post\">";
 							echo "<table cellpadding=\"10\"";
 							echo "<tr><th>Flight Number</th>

@@ -78,7 +78,6 @@
 			<table cellpadding="5">
 				<tr>
 					<td class="fix_table">Enter the Departure Date</td>
-					<td class="fix_table">Enter the No. of Passengers</td>
 				</tr>
 				<tr>
 					<td class="fix_table"><input type="date" name="dep_date" min=
@@ -92,7 +91,6 @@
 							date_add($max_date,date_interval_create_from_date_string("90 days")); 
 							echo date_format($max_date,"Y-m-d");
 						?> required></td>
-					<td class="fix_table"><input type="number" name="no_of_pass" placeholder="Eg. 5" required></td>
 				</tr>
 			</table>
 			<br>
