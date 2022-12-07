@@ -70,7 +70,7 @@
                 echo "<p><strong>Package Infomation<strong></p>";
                 echo "<table cellpadding=\"10\">";
                 echo "<tr>";
-                echo "<td class=\"fix_table_short\">Weight</td>";
+                echo "<td class=\"fix_table_short\">Weight(kg)</td>";
                 echo "<td class=\"fix_table_short\">Receiver Name</td>";
                 echo "<td class=\"fix_table_short\">Sender Name</td>";	
                 echo "</tr>";
