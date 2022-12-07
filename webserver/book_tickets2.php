@@ -55,17 +55,26 @@
 			</ul>
 		</div>
 		<?php
-			$flight_no=trim($_POST['select_flight']);
-			$_SESSION['select_flight'] = $flight_no;
+
+			$_SESSION['select_flight'] = $_POST['select_flight'];
+			$flight_no = $_POST['select_flight'];
+			$user_name = $_SESSION['login_user'];
 			require_once('Database Connection file/mysqli_connect.php');
-			$query="SELECT SeatNumber,PassengerID,SeatType FROM seat where FlightNumber = ?";
+			$query="SELECT SeatNumber,PassengerID FROM seat where FlightNumber = ?";
 			$stmt=mysqli_prepare($dbc,$query);
 			mysqli_stmt_bind_param($stmt,"s", $flight_no);
 			mysqli_stmt_execute($stmt);
-			mysqli_stmt_bind_result($stmt,$SeatNumber,$PassengerID,$SeatType);
+			mysqli_stmt_bind_result($stmt,$SeatNumber,$PassengerID);
 			mysqli_stmt_store_result($stmt);
 			//$pass_name=array();
 			echo "<h2>BOOK THE TICKET</h2>";
+			$query2 = "SELECT COUNT(*) FROM customer WHERE CustomerEmail = ?";
+			$stmt2 = mysqli_prepare($dbc, $query2);
+			mysqli_stmt_bind_param($stmt2,"s", $user_name);
+			mysqli_stmt_execute($stmt2);
+			mysqli_stmt_bind_result($stmt2,$customer);
+			mysqli_stmt_fetch($stmt2);
+			if ($customer == 1) {
 			echo "<form action=\"add_ticket_details_form_handler.php\" method=\"post\">";
 					echo "<p><strong>PASSENGER <strong></p>";
 					echo "<table cellpadding=\"10\">";
@@ -75,78 +84,80 @@
 					echo "<td class=\"fix_table_short\">Passenger's Age</td>";	
 					echo "</tr>";
 					echo "<tr>";
-					echo "<td class=\"fix_table_short\"><input type=\"text\" name=\"pass_id[]\" required></td>";
-					echo "<td class=\"fix_table_short\"><input type=\"text\" name=\"pass_name[]\" required></td>";
-					echo "<td class=\"fix_table_short\"><input type=\"number\" name=\"pass_age[]\" required></td>";
+					echo "<td class=\"fix_table_short\"><input type=\"text\" name=\"pass_id\" required></td>";
+					echo "<td class=\"fix_table_short\"><input type=\"text\" name=\"pass_name\" required></td>";
+					echo "<td class=\"fix_table_short\"><input type=\"number\" name=\"pass_age\" required></td>";
 					echo "<td class=\"fix_table_short\">";
   					echo "</td>";
   					
 					echo "</tr>";
 					echo "</table>";
-					/*
-					echo "<h2>SELECT SEAT FOR" .$flight_no."</h2>";
-					echo'<table>
-					<tr>
-						 <td style="vertical-align: top">
-						 <table cellpadding=\"10\"
-						 <tr>
-						 <th>Seat Row</th>
-						 <th>Seat Type</th>
-						 </tr>';
-						 while(mysqli_stmt_fetch($stmt)) {
-							 echo "<tr>
-							 <td>".$SeatNumber."</td>
-							 <td>".$SeatType."</td>
-							 <td><input type=\"radio\" name=\"select_seatRow\" value=\"".$SeatNumber." \"></td>
-							 </tr>";
-						 }
-						 echo "</table> <br>";
-						 echo '</td>
-						 <td style="vertical-align: top">
-						 <table cellpadding=\"10\"
-						 <tr>
-						 <th>Seat Row</th>
-						 <th>Seat Type</th>
-						 </tr>';
-						 mysqli_stmt_bind_param($stmt,"si", $flight_no, $column);
-						 mysqli_stmt_execute($stmt);
-						 mysqli_stmt_bind_result($stmt,$SeatColumn,$SeatRow,$FlightNumber,$SeatType);
-						 mysqli_stmt_store_result($stmt);
-						 while(mysqli_stmt_fetch($stmt)) {
-							 echo "<tr>
-							 <td>".$SeatRow."</td>
-							 <td>".$SeatType."</td>
-							 <td><input type=\"radio\" name=\"select_seatRow\" value=\"".$SeatRow." \"></td>
-							 </tr>";
-						 }	 
-						 echo '</td>
-					</tr>
-			   	</table> <br>
-				<input type=\"submit\" value=\"Select Seat\" name=\"Select\">;
-				</form>';*/
-				$takenseats = array();	
-				while(mysqli_stmt_fetch($stmt)) {
-					array_push($takenseats,$SeatNumber);
-				}
-				echo '<h2>SELECT SEAT FOR ' .$flight_no. "</h2>";
-				echo "<p><strong>SEATS <strong></p>";
-				echo "<table cellpadding=\"10\"";
-				echo '<tr>
-				<th>Seat Number</th>
-				<th>Seat Type</th>
-				</tr>';
-				for($x = 1; $x <= 20; $x++) {
-					if (!(in_array($x,$takenseats))) {
-						echo "<tr>
-						<td>".$x."</td>
-						<td> Economy </td>
-						<td><input type=\"radio\" name=\"select_seat\" value=\"".$x." \"></td>
-						</tr>";
+					$takenseats = array();	
+					while(mysqli_stmt_fetch($stmt)) {
+						array_push($takenseats,$SeatNumber);
 					}
+					echo '<h2>SELECT SEAT FOR ' .$flight_no. "</h2>";
+					echo "<p><strong>SEATS <strong></p>";
+					echo "<table cellpadding=\"10\"";
+					echo '<tr>
+					<th>Seat Number</th>
+					<th>Seat Type</th>
+					</tr>';
+					for($x = 1; $x <= 20; $x++) {
+						if (!(in_array($x,$takenseats))) {
+							echo "<tr>
+							<td>".$x."</td>
+							<td> Economy </td>
+							<td><input type=\"radio\" name=\"select_seat\" value=\"".$x." \"></td>
+							</tr>";
+						}
+					}
+					echo "</table> <br>";
+					echo "<input type=\"submit\" value=\"Book Ticket\" name=\"Select\">";
+					echo "</form>";
 				}
-				echo "</table> <br>";
-				echo "<input type=\"submit\" value=\"Select Flight\" name=\"Select\">";
-				echo "</form>";
+				else {
+					echo "<form action=\"add_customer_details.php\" method=\"post\">";
+					echo "<p><strong>PASSENGER <strong></p>";
+					echo "<table cellpadding=\"10\">";
+					echo "<tr>";
+					echo "<td class=\"fix_table_short\">Passenger's ID Number</td>";
+					echo "<td class=\"fix_table_short\">Passenger's Name</td>";
+					echo "<td class=\"fix_table_short\">Passenger's Age</td>";	
+					echo "</tr>";
+					echo "<tr>";
+					echo "<td class=\"fix_table_short\"><input type=\"text\" name=\"pass_id\" required></td>";
+					echo "<td class=\"fix_table_short\"><input type=\"text\" name=\"pass_name\" required></td>";
+					echo "<td class=\"fix_table_short\"><input type=\"number\" name=\"pass_age\" required></td>";
+					echo "<td class=\"fix_table_short\">";
+  					echo "</td>";
+  					
+					echo "</tr>";
+					echo "</table>";
+					$takenseats = array();	
+					while(mysqli_stmt_fetch($stmt)) {
+						array_push($takenseats,$SeatNumber);
+					}
+					echo '<h2>SELECT SEAT FOR ' .$flight_no. "</h2>";
+					echo "<p><strong>SEATS <strong></p>";
+					echo "<table cellpadding=\"10\"";
+					echo '<tr>
+					<th>Seat Number</th>
+					<th>Seat Type</th>
+					</tr>';
+					for($x = 1; $x <= 20; $x++) {
+						if (!(in_array($x,$takenseats))) {
+							echo "<tr>
+							<td>".$x."</td>
+							<td> Economy </td>
+							<td><input type=\"radio\" name=\"select_seat\" value=\"".$x." \"></td>
+							</tr>";
+						}
+					}
+					echo "</table> <br>";
+					echo "<input type=\"submit\" value=\"Book Ticket\" name=\"Select\">";
+					echo "</form>";
+				}
 		?>
 
 	</body>
