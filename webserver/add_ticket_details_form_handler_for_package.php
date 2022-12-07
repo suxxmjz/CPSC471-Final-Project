@@ -99,6 +99,7 @@
 			echo "<table cellpadding=\"10\"";
 			echo'
 			<tr><td>Customer Email </td> <td>' .$user_name. '</td></tr>
+			<tr><td>Ticket ID </td> <td>' .$TicketID. '</td></tr>
 			<tr><td>Package ID </td> <td>' .$PackageID. '</td></tr>
 			<tr><td>Package Weight </td> <td>' .$weight. '</td></tr>
 			<tr><td>Package Sender </td><td>' .$sender_name. '</td></tr>
