@@ -83,7 +83,7 @@
                 echo "<td class=\"fix_table_short\">Sender Name</td>";	
                 echo "</tr>";
                 echo "<tr>";
-                echo "<td class=\"fix_table_short\"><input type=\"number\" min=\"1\" max=\"20\" name=\"weight\" required></td>";
+                echo "<td class=\"fix_table_short\"><input type=\"number\" min=\"1\" max=\"99\" name=\"weight\" required></td>";
                 echo "<td class=\"fix_table_short\"><input type=\"text\" name=\"receiver_name\" required></td>";
                 echo "<td class=\"fix_table_short\"><input type=\"text\" name=\"sender_name\" required></td>";
                 echo "<td class=\"fix_table_short\">";
@@ -103,7 +103,7 @@
                 echo "<td class=\"fix_table_short\">Sender Name</td>";	
                 echo "</tr>";
                 echo "<tr>";
-                echo "<td class=\"fix_table_short\"><input type=\"number\" min=\"1\" max=\"20\" name=\"weight\" required></td>";
+                echo "<td class=\"fix_table_short\"><input type=\"number\" min=\"1\" max=\"99\" name=\"weight\" required></td>";
                 echo "<td class=\"fix_table_short\"><input type=\"text\" name=\"receiver_name\" required></td>";
                 echo "<td class=\"fix_table_short\"><input type=\"text\" name=\"sender_name\" required></td>";
                 echo "<td class=\"fix_table_short\">";
