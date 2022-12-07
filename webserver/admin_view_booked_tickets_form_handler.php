@@ -43,21 +43,17 @@
 		</div>
 		<h2>BOOKED TICKETS</h2>
 		<?php
-			if(isset($_POST['Submit']))
-			{
-				$data_missing=array();
-				if(empty($_POST['flight_no']))
-				{
-					$data_missing[]='Flight No.';
-				}
-				else
-				{
-					$flight_no=trim($_POST['flight_no']);
-				}
+				// if(empty($_POST['flight_no']))
+				// {
+				// 	$data_missing[]='Flight No.';
+				// }
+				// else
+				// {
+				// 	$flight_no=trim($_POST['select_flight']);
+				// }
 
-
-				if(empty($data_missing))
-				{
+				
+				$flight_no = $_POST["select_flight"];
 					require_once('Database Connection file/mysqli_connect.php');
 					$query="SELECT TicketID,FlightNumber,CustomerEmail FROM ticket where FlightNumber=?";
 					$stmt=mysqli_prepare($dbc,$query);
@@ -88,20 +84,6 @@
     				}
 					mysqli_stmt_close($stmt);
 					mysqli_close($dbc);
-				}
-				else
-				{
-					echo "The following data fields were empty! <br>";
-					foreach($data_missing as $missing)
-					{
-						echo $missing ."<br>";
-					}
-				}
-			}
-			else
-			{
-				echo "Submit request not received";
-			}
 		?>
 	</body>
 </html>

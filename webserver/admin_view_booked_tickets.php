@@ -45,7 +45,7 @@
 			<div>
 			<table cellpadding="5">
 				<tr>
-					<td class="fix_table">Enter the Flight No.</td>
+					<td class="fix_table">Enter the Flight No.</td> 
 					<td class="fix_table"><input type="text" name="flight_no" required></td>
 			
 				</tr>

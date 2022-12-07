@@ -60,7 +60,7 @@
 				}
 				else
 				{
-					$arr_time=$_POST['gateNum'];
+					$gateNum=$_POST['gateNum'];
 				}
 
 				
@@ -71,9 +71,9 @@
 					require_once('Database Connection file/mysqli_connect.php');
 
 			
-						$query="INSERT INTO flight (Source,Destination,DepTime,StartTime,EndTime,GateNumber) VALUES (?,?,?,?,?,?)";
+						$query="INSERT INTO flight (DepTime, StartTime, EndTime,Destination, Source, GateNumber) VALUES (?,?,?,?,?,?)";
 						$stmt=mysqli_prepare($dbc,$query);
-						mysqli_stmt_bind_param($stmt,"sssssi",$origin,$destination,$dep_date,$dep_time,$arr_time,$gateNum);
+						mysqli_stmt_bind_param($stmt,"sssssi",$dep_date,$dep_time,$arr_time,$destination,$origin,$gateNum);
 						mysqli_stmt_execute($stmt);
 						$affected_rows=mysqli_stmt_affected_rows($stmt);
 						mysqli_stmt_close($stmt);
