@@ -111,6 +111,7 @@
 			echo "<table cellpadding=\"10\"";
 			echo'
 			<tr><td>Customer Email </td> <td>' .$user_name. '</td></tr>
+			<tr><td>Ticket ID </td> <td>' .$TicketID. '</td></tr>
 			<tr><td>Passenger Name </td> <td>' .$passname. '</td></tr>
 			<tr><td>Passenger ID </td><td>' .$passid. '</td></tr>
 			<tr><td>Seat Number </td><td>' .$seat_no. '</td></tr>
