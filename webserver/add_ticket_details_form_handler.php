@@ -106,7 +106,7 @@
 			$stmt=mysqli_prepare($dbc,$query);
 			mysqli_stmt_bind_param($stmt,"is", $TicketID, $passid);
 			mysqli_stmt_execute($stmt);
-			echo '<h2>BOOKED TICKET FOR ' .$flight_no. "</h2>
+			echo '<h2>BOOKED PASSENGER TICKET FOR FLIGHT' .$flight_no. "</h2>
 			<p> Ticket Details </p>";	
 			echo "<table cellpadding=\"10\"";
 			echo'
