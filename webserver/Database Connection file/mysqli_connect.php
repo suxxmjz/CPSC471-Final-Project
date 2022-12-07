@@ -1,6 +1,6 @@
 <?php
 DEFINE('DB_USER','root');
-DEFINE('DB_PASSWORD','masterpiece4325');
+DEFINE('DB_PASSWORD','');
 DEFINE('DB_HOST','localhost');
 DEFINE('DB_NAME','471airline');
 
