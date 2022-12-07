@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<title>
-			Delete Flight Schedule Details
+			Change Flight Schedule Details
 		</title>
 		<style>
 			input {
