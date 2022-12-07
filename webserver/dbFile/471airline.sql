@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 07, 2022 at 01:31 AM
+-- Generation Time: Dec 07, 2022 at 03:37 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -157,13 +157,6 @@ CREATE TABLE `passenger` (
   `PassengerAge` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `passenger`
---
-
-INSERT INTO `passenger` (`PassengerID`, `PassengerName`, `PassengerAge`) VALUES
-('none', '[value-2]', 0);
-
 -- --------------------------------------------------------
 
 --
@@ -188,14 +181,6 @@ CREATE TABLE `ticket` (
   `CustomerEmail` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `ticket`
---
-
-INSERT INTO `ticket` (`TicketID`, `FlightNumber`, `CustomerEmail`) VALUES
-(4, 765, 'abcd@gmail.com'),
-(5, 765, 'abcd@gmail.com');
-
 -- --------------------------------------------------------
 
 --
@@ -205,15 +190,8 @@ INSERT INTO `ticket` (`TicketID`, `FlightNumber`, `CustomerEmail`) VALUES
 CREATE TABLE `tickettype` (
   `PackageID` int(10) DEFAULT NULL,
   `TicketID` int(10) NOT NULL,
-  `PassengerID` int(10) DEFAULT NULL
+  `PassengerID` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tickettype`
---
-
-INSERT INTO `tickettype` (`PackageID`, `TicketID`, `PassengerID`) VALUES
-(NULL, 4, 123);
 
 -- --------------------------------------------------------
 
@@ -232,7 +210,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`UserEmail`, `UserName`, `UserPassword`) VALUES
-('abcd@gmail.com', 'a', 'b');
+('abcd@gmail.com', 'a', 'b'),
+('abcde@gmail.com', 'a', 'c');
 
 --
 -- Indexes for dumped tables
@@ -334,7 +313,7 @@ ALTER TABLE `package`
 -- AUTO_INCREMENT for table `ticket`
 --
 ALTER TABLE `ticket`
-  MODIFY `TicketID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `TicketID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- Constraints for dumped tables
@@ -379,7 +358,8 @@ ALTER TABLE `ticket`
 --
 ALTER TABLE `tickettype`
   ADD CONSTRAINT `tickettype_ibfk_1` FOREIGN KEY (`TicketID`) REFERENCES `ticket` (`TicketID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tickettype_ibfk_2` FOREIGN KEY (`PackageID`) REFERENCES `package` (`PackageID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `tickettype_ibfk_2` FOREIGN KEY (`PackageID`) REFERENCES `package` (`PackageID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tickettype_ibfk_3` FOREIGN KEY (`PassengerID`) REFERENCES `passenger` (`PassengerID`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
