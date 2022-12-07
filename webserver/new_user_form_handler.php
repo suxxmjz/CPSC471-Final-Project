@@ -35,26 +35,33 @@
 				}
 
 				if(empty($data_missing))
-				{
-					require_once('Database Connection file/mysqli_connect.php');
-					$query="INSERT INTO user (UserEmail,UserName,UserPassword) VALUES (?,?,?)";
-					$stmt=mysqli_prepare($dbc,$query);
-					mysqli_stmt_bind_param($stmt,"sss",$email_id,$user_name,$password);
-					mysqli_stmt_execute($stmt);
-					$affected_rows=mysqli_stmt_affected_rows($stmt);
+				{	
+					if(filter_var($email_id, FILTER_VALIDATE_EMAIL)){
+						require_once('Database Connection file/mysqli_connect.php');
+						$query="INSERT INTO user (UserEmail,UserName,UserPassword) VALUES (?,?,?)";
+						$stmt=mysqli_prepare($dbc,$query);
+						mysqli_stmt_bind_param($stmt,"sss",$email_id,$user_name,$password);
+						mysqli_stmt_execute($stmt);
+						$affected_rows=mysqli_stmt_affected_rows($stmt);
 
-					mysqli_stmt_close($stmt);
-					mysqli_close($dbc);
-			
-					if($affected_rows==1)
-					{
-						header('location:user_reg_success.php');
+						mysqli_stmt_close($stmt);
+						mysqli_close($dbc);
+						if($affected_rows==1)
+						{
+							header('location:user_reg_success.php?msg = success');
+						}
+						else
+						{
+							echo "Submit Error";
+							echo mysqli_error();
+						}
 					}
-					else
-					{
-						echo "Submit Error";
-						echo mysqli_error();
+					else{
+						echo "Invalid email.";
+						
+						header('location:user_failed.php?msg =failed');
 					}
+
 				}
 				else
 				{

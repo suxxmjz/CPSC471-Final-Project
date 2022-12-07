@@ -69,7 +69,7 @@
             echo "<td class=\"fix_table_short\">Community</td>";	
             echo "</tr>";
             echo "<tr>";
-            echo "<td class=\"fix_table_short\"><input type=\"number\" name=\"phone_number\" required></td>";
+            echo "<td class=\"fix_table_short\"><input type=\"number\" min=\"1000000000\" max=\"9999999999\" name=\"phone_number\" required></td>";
             echo "<td class=\"fix_table_short\"><input type=\"number\" name=\"building_number\" required></td>";
             echo "<td class=\"fix_table_short\"><input type=\"text\" name=\"community\" required></td>";
             echo "<td class=\"fix_table_short\">";
