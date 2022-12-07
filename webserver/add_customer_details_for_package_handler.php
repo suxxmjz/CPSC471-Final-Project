@@ -67,7 +67,7 @@
 			mysqli_stmt_bind_param($stmt,"sissis",$user_name, $phone_number, $province, $city, $building_number, $community);
 			mysqli_stmt_execute($stmt);	
 			echo "<h2>Congrats you are now a customer " .$user_name. "</h2>";
-			echo "<form action=\"add_ticket_details_form_handler.php\" method=\"post\">";
+			echo "<form action=\"add_ticket_details_form_handler_for_package.php\" method=\"post\">";
             echo "<input type=\"submit\" value=\"Continue to Book your Ticket\" name=\"Select\">";
             echo "</form>";	
 		?>

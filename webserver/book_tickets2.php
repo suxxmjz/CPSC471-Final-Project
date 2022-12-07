@@ -75,7 +75,7 @@
 			mysqli_stmt_bind_result($stmt2,$customer);
 			mysqli_stmt_fetch($stmt2);
 			if ($customer == 1) {
-			echo "<form action=\"add_ticket_details_form_handler.php\" method=\"post\">";
+			echo "<form action=\"add_ticket_details_form_handler_for_package.php\" method=\"post\">";
 					echo "<p><strong>PASSENGER <strong></p>";
 					echo "<table cellpadding=\"10\">";
 					echo "<tr>";
