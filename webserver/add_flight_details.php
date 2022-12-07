@@ -26,7 +26,7 @@
 	<body>
 		<img class="logo" src="images/logo.jpg"/> 
 		<h1 id="title">
-			SUNSET AIRLINES
+			SUJACA AIRLINES
 		</h1>
 		<div>
 			<ul>
