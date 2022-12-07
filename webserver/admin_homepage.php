@@ -28,6 +28,7 @@
 				<td class="admin_func"><a href="admin_view_booked_tickets.php"><i class="fa fa-plane" aria-hidden="true"></i> View List of Booked Tickets for a Flight</a>
 				</td>
 			</tr> -->
+			
 			 <tr>
 				<td class="admin_func"><a href="admin_view_all.php"><i class="fa fa-plane" aria-hidden="true"></i> View Tickets for Flight</a>
 				</td>
@@ -46,6 +47,10 @@
 			</tr>
 			<tr>
 				<td class="admin_func"><a href="change_flight_details.php"><i class="fa fa-plane" aria-hidden="true"></i> Change Flight Schedule Details</a>
+				</td>
+			</tr>
+			<tr>
+				<td class="admin_func"><a href="admin_change_user.php"><i class="fa fa-plane" aria-hidden="true"></i> Change User Details</a>
 				</td>
 			</tr>
 			
