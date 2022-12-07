@@ -56,6 +56,10 @@
 				<td class="admin_func"><a href="book_tickets.php"><i class="fa fa-plane" aria-hidden="true"></i> Book Flight Tickets</a>
 				</td>
 			</tr>
+			<tr>
+				<td class="admin_func"><a href="book_tickets_for_package.php"><i class="fa fa-plane" aria-hidden="true"></i> Book Package Tickets</a>
+				</td>
+			</tr>
 			<!-- <tr>
 				<td class="admin_func"><a href="view_booked_tickets.php"><i class="fa fa-plane" aria-hidden="true"></i> View Booked Flight Tickets</a>
 				</td>
