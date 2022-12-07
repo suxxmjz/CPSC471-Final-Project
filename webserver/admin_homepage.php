@@ -44,6 +44,10 @@
 				<td class="admin_func"><a href="delete_flight_details.php"><i class="fa fa-plane" aria-hidden="true"></i> Delete Flight Schedule Details</a>
 				</td>
 			</tr>
+			<tr>
+				<td class="admin_func"><a href="change_flight_details.php"><i class="fa fa-plane" aria-hidden="true"></i> Change Flight Schedule Details</a>
+				</td>
+			</tr>
 			
 		</table>
 	</body>
