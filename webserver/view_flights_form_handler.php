@@ -89,7 +89,7 @@
 						}
 						else
 						{	
-							echo "<form action=\"book_tickets2_for_package.php\" method=\"post\">";
+							echo "<form action=\"book_tickets2.php\" method=\"post\">";
 							echo "<table cellpadding=\"10\"";
 							echo "<tr><th>Flight Number</th>
 							<th>Departure Date</th>
