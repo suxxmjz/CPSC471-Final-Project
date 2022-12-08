@@ -106,11 +106,12 @@
 			$stmt=mysqli_prepare($dbc,$query);
 			mysqli_stmt_bind_param($stmt,"is", $TicketID, $passid);
 			mysqli_stmt_execute($stmt);
-			echo '<h2>BOOKED TICKET FOR ' .$flight_no. "</h2>
+			echo '<h2>BOOKED PASSENGER TICKET FOR FLIGHT' .$flight_no. "</h2>
 			<p> Ticket Details </p>";	
 			echo "<table cellpadding=\"10\"";
 			echo'
 			<tr><td>Customer Email </td> <td>' .$user_name. '</td></tr>
+			<tr><td>Ticket ID </td> <td>' .$TicketID. '</td></tr>
 			<tr><td>Passenger Name </td> <td>' .$passname. '</td></tr>
 			<tr><td>Passenger ID </td><td>' .$passid. '</td></tr>
 			<tr><td>Seat Number </td><td>' .$seat_no. '</td></tr>

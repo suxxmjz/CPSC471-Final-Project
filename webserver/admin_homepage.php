@@ -24,8 +24,12 @@
 		<h2>Welcome Administrator!</h2>
 		<table cellpadding="5">
 			
-			<tr>
+			<!-- <tr>
 				<td class="admin_func"><a href="admin_view_booked_tickets.php"><i class="fa fa-plane" aria-hidden="true"></i> View List of Booked Tickets for a Flight</a>
+				</td>
+			</tr> -->
+			 <tr>
+				<td class="admin_func"><a href="admin_view_all.php"><i class="fa fa-plane" aria-hidden="true"></i> View Tickets for Flight</a>
 				</td>
 			</tr>
 			<tr>

@@ -94,11 +94,12 @@
 			$stmt=mysqli_prepare($dbc,$query);
 			mysqli_stmt_bind_param($stmt,"is", $TicketID, $PackageID);
 			mysqli_stmt_execute($stmt);
-			echo '<h2>BOOKED TICKET FOR ' .$flight_no. "</h2>
+			echo '<h2>BOOKED PACKAGE TICKET FOR FLIGHT ' .$flight_no. "</h2>
 			<p> Ticket Details </p>";	
 			echo "<table cellpadding=\"10\"";
 			echo'
 			<tr><td>Customer Email </td> <td>' .$user_name. '</td></tr>
+			<tr><td>Ticket ID </td> <td>' .$TicketID. '</td></tr>
 			<tr><td>Package ID </td> <td>' .$PackageID. '</td></tr>
 			<tr><td>Package Weight </td> <td>' .$weight. '</td></tr>
 			<tr><td>Package Sender </td><td>' .$sender_name. '</td></tr>

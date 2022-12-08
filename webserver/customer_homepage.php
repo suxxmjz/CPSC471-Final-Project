@@ -53,19 +53,23 @@
 		?>
 		<table cellpadding="5">
 			<tr>
-				<td class="admin_func"><a href="book_tickets.php"><i class="fa fa-plane" aria-hidden="true"></i> Book Flight Tickets</a>
+				<td class="admin_func"><a href="book_tickets.php"><i class="fa fa-plane" aria-hidden="true"></i> Book Passenger Flight Tickets</a>
 				</td>
 			</tr>
 			<tr>
-				<td class="admin_func"><a href="book_tickets_for_package.php"><i class="fa fa-plane" aria-hidden="true"></i> Book Package Tickets</a>
+				<td class="admin_func"><a href="book_tickets_for_package.php"><i class="fa fa-plane" aria-hidden="true"></i> Book Package Flight Tickets</a>
 				</td>
 			</tr>
-			<!-- <tr>
-				<td class="admin_func"><a href="view_booked_tickets.php"><i class="fa fa-plane" aria-hidden="true"></i> View Booked Flight Tickets</a>
+			 <tr>
+				<td class="admin_func"><a href="view_booked_tickets.php"><i class="fa fa-plane" aria-hidden="true"></i> View Or Change Booked Tickets</a>
 				</td>
-			</tr> -->
+			</tr> 
 			<tr>
-				<td class="admin_func"><a href="cancel_booked_tickets.php"><i class="fa fa-plane" aria-hidden="true"></i> Cancel Booked Flight Tickets</a>
+				<td class="admin_func"><a href="cancel_booked_tickets.php"><i class="fa fa-plane" aria-hidden="true"></i> Cancel Booked Tickets</a>
+				</td>
+			</tr>
+			<tr>
+				<td class="admin_func"><a href="user_change_user_information.php"><i class="fa fa-plane" aria-hidden="true"></i> Change Account Information</a>
 				</td>
 			</tr>
 		</table>
