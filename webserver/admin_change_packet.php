@@ -53,7 +53,7 @@
             echo "<td class=\"fix_table_short\">Package Sender</td>";	
             echo "</tr>";
             echo "<tr>";
-            echo "<td class=\"fix_table_short\"><input type=\"number\" name=\"package_weight\" ></td>";
+            echo "<td class=\"fix_table_short\"><input type=\"number\"min=\"1\" max=\"99\" name=\"package_weight\" ></td>";
             echo "<td class=\"fix_table_short\"><input type=\"text\" name=\"package_receiver\" ></td>";
             echo "<td class=\"fix_table_short\"><input type=\"text\" name=\"package_sender\" ></td>";
             echo "<td class=\"fix_table_short\">";
