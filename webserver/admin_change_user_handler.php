@@ -37,7 +37,7 @@
 		</h1>
 		<div>
 			<ul>
-				<li><a href="home_page.php"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+				<!-- <li><a href="home_page.php"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li> -->
 				<li><a href="admin_homepage.php"><i class="fa fa-desktop" aria-hidden="true"></i> Dashboard</a></li>
 				<li><a href="logout_handler.php"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
 			</ul>
@@ -89,7 +89,7 @@
                 echo "<td class=\"fix_table_short\">New Phone Number</td>";
                 echo "</tr>";
                 echo "<tr>";
-                echo "<td class=\"fix_table_short\"><input type=\"text\" name=\"new_phonenumber\" ></td>";
+                echo "<td class=\"fix_table_short\"><input type=\"number\" min=\"1000000000\" max=\"9999999999\" name=\"new_phonenumber\" ></td>";
                 echo "<td class=\"fix_table_short\">";
                 echo "</td>";
                 echo "</tr>";
