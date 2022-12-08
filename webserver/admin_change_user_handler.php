@@ -1,11 +1,13 @@
+<!-- NOT IMPLEMENTED YET -->
 <?php
 	session_start();
 ?>
 <html>
 	<head>
-		<title>Change User Email</title>
-	</head>
-    <style>
+		<title>
+			View Available Flights
+		</title>
+		<style>
 			input {
     			border: 1.5px solid #dd6a1fa1;
     			border-radius: 4px;
@@ -35,83 +37,109 @@
 		</h1>
 		<div>
 			<ul>
-				<!-- <li><a href="home_page.php"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li> -->
+				<li><a href="home_page.php"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
 				<li><a href="admin_homepage.php"><i class="fa fa-desktop" aria-hidden="true"></i> Dashboard</a></li>
 				<li><a href="logout_handler.php"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
 			</ul>
 		</div>
-		<h2>CHANGING USER EMAIL</h2>
-	<body>
+        <h2>Account Information</h2>
 		<?php
-			// if(isset($_POST['Continue']))
-			// {
-				$data_missing=array();
-				if(empty($_POST['useremail']))
-				{
-					$data_missing[]='User Email';
-				}
-				else
-				{
-					$user_email=($_POST['useremail']);
-				}
-
-                    require_once('Database Connection file/mysqli_connect.php');
-                    $query2 = "SELECT COUNT(*) FROM user WHERE UserEmail = ?";
-                    $stmt2 = mysqli_prepare($dbc, $query2);
-                    mysqli_stmt_bind_param($stmt2,"s", $user_email);
-                    mysqli_stmt_execute($stmt2);
-                    mysqli_stmt_bind_result($stmt2,$UserEmail);
-                    mysqli_stmt_fetch($stmt2);
-                    if ($UserEmail == 1) {
-                    
-                    $_SESSION['useremail'] = trim($_POST['useremail']);
-                    echo "<form action=\"admin_change_user_handler2.php\" method=\"post\">";
-                            // echo "<p><strong>PASSENGER <strong></p>";
-                            echo "<table cellpadding=\"10\">";
-                            echo "<tr>";
-                            echo "<td class=\"fix_table_short\">Enter New Email</td>";
-                            echo "</tr>";
-                            echo "<tr>";
-            
-                            echo "<td class=\"fix_table_short\"><input type=\"text\" name=\"newEmail\" required></td>";
-                            echo "<td class=\"fix_table_short\">";
-                            echo "</td>";
-                            
-                            echo "</tr>";
-                            echo "</table> <br>";
-                            echo "<input type=\"submit\" value=\"Change\" name=\"Select\">";
-                            echo "</form>";
-                        }
-                        else{
-                            header("location: admin_change_user.php?msg=failed");
-
-                        }
-                    
-                            // if($affected_rows==1)
-                            // {
-                            //     echo "Successfully Changed";
-                            //     header("location: admin_change_user.php?msg=success");
-                            // }
-                            // else
-                            // {
-                            //     echo "Submit Error";
-                            //     echo mysqli_error();
-                            //     header("location: admin_change_user.php?msg=failed");
-                            // }
-                        
-				// else
-				// {
-				// 	echo "The following data fields were empty! <br>";
-				// 	foreach($data_missing as $missing)
-				// 	{
-				// 		echo $missing ."<br>";
-				// 	}
-				// }
-           // }
-			// else
-			// {
-			// 	echo "Change request not received";
-			// }
-		?>
-	</body>
+        $user_name = $_POST['useremail'];
+		$_SESSION['useremail'] = $user_name;
+        	require_once('Database Connection file/mysqli_connect.php');
+            $query="SELECT count(*) FROM customer WHERE CustomerEmail = ?";
+            $stmt=mysqli_prepare($dbc,$query);
+            mysqli_stmt_bind_param($stmt,"s",$user_name);
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_bind_result($stmt,$customer);
+            mysqli_stmt_fetch($stmt);
+            if ($customer == 1) {  
+                mysqli_stmt_fetch($stmt);
+                $query="SELECT UserName, UserPassword, PhoneNumber, Province, City, BuildingNum,Community FROM (customer NATURAL JOIN user) WHERE CustomerEmail = ?";
+                $stmt=mysqli_prepare($dbc,$query);
+                mysqli_stmt_bind_param($stmt,"s",$user_name);
+                mysqli_stmt_execute($stmt);
+                mysqli_stmt_bind_result($stmt, $Name, $Password ,$PhoneNumber, $Province, $City, $BuildingNumber, $Community);
+                mysqli_stmt_fetch($stmt);          
+                echo "<form action=\"admin_change_user_handler2.php\" method=\"post\">";
+                echo "<table cellpadding=\"10\">";
+                echo "<tr>";
+                echo "<td class=\"fix_table_short\">Current Email ".$user_name."</td>";
+                echo "</tr>";
+                echo "<tr>";
+                echo "<td class=\"fix_table_short\">New Email</td>";
+                echo "</tr>";
+                echo "<tr>";
+                echo "<td class=\"fix_table_short\"><input type=\"text\" name=\"new_email\" ></td>";
+                echo "<td class=\"fix_table_short\">";
+                echo "</td>";
+                echo "</tr>";
+                echo "<tr>";
+                echo "<td class=\"fix_table_short\">New Password</td>";
+                echo "</tr>";
+                echo "<tr>";
+                echo "<td class=\"fix_table_short\"><input type=\"text\" name=\"new_password\" ></td>";
+                echo "<td class=\"fix_table_short\">";
+                echo "</td>";
+                echo "</tr>";
+                echo "<tr>";
+                echo "<td class=\"fix_table_short\">Current Phone Number ".$PhoneNumber. "</td>";
+                echo "</tr>";
+                echo "<tr>";
+                echo "<td class=\"fix_table_short\">New Phone Number</td>";
+                echo "</tr>";
+                echo "<tr>";
+                echo "<td class=\"fix_table_short\"><input type=\"text\" name=\"new_phonenumber\" ></td>";
+                echo "<td class=\"fix_table_short\">";
+                echo "</td>";
+                echo "</tr>";
+                echo "</table>"; 
+                echo "<input type=\"submit\" value=\"Change Information\" name=\"Select\">";
+                echo "</form>";  
+                echo "<table cellpadding=\"10\"><tr>";
+                echo "<td class=\"fix_table_short\">Current Address is</td></tr>";
+                echo "<tr><td>".$BuildingNumber. "  ".$Community. " ".$City. " " .$Province."</td></tr>";
+                echo "</table>"; 
+                echo "<form action=\"admin_change_user_address.php\" method=\"post\">";
+                echo "<input type=\"submit\" value=\"Change Address\" name=\"Select\">";
+                echo "</form>";  
+            }
+            else {
+                mysqli_stmt_fetch($stmt);
+                $query="SELECT * FROM user WHERE UserEmail = ?";
+                $stmt=mysqli_prepare($dbc,$query);
+                mysqli_stmt_bind_param($stmt,"s",$user_name);
+                mysqli_stmt_execute($stmt);
+                mysqli_stmt_bind_result($stmt,$UserEmail, $Name, $Password);
+                mysqli_stmt_fetch($stmt);  
+                echo "<form action=\"admin_change_user_handler2.php\" method=\"post\">";
+                echo "<p><strong> Hello " .$Name. "<strong></p>";
+                echo "<table cellpadding=\"10\">";
+                echo "<tr>";
+                echo "<td class=\"fix_table_short\">Current Email ".$UserEmail."</td>";
+                echo "</tr>";
+                echo "<tr>";
+                echo "<td class=\"fix_table_short\">New Email</td>";
+                echo "</tr>";
+                echo "<tr>";
+                echo "<td class=\"fix_table_short\"><input type=\"text\" name=\"new_email\" ></td>";
+                echo "<td class=\"fix_table_short\">";
+                echo "</td>";
+                echo "</tr>";
+                echo "<tr>";
+                echo "<td class=\"fix_table_short\">New Password</td>";
+                echo "</tr>";
+                echo "<tr>";
+                echo "<td class=\"fix_table_short\"><input type=\"text\" name=\"new_password\" ></td>";
+                echo "<td class=\"fix_table_short\">";
+                echo "</td>";
+                echo "</tr>";
+                echo "</table>"; 
+                echo "<input type=\"submit\" value=\"Change Information\" name=\"Select\">";
+                echo "</form>";            
+            }
+            mysqli_stmt_close($stmt);
+            mysqli_close($dbc);
+                ?>
+            </body>
 </html>

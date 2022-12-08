@@ -60,7 +60,7 @@
             
 			<table cellpadding="5" style="padding-left: 20px;">
 				<tr>
-					<td class="fix_table">Enter a valid user email.</td>
+					<td class="fix_table">Enter a Valid User Email.</td>
 					<td class="fix_table"><input type="text" name="useremail" required></td>
 					<!-- <td class="fix_table">Enter the Departure Date</td> -->
 				</tr>
