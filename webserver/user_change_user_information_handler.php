@@ -49,7 +49,7 @@
 		</h1>
 		<div>
 			<ul>
-				<li><a href="home_page.php"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+				<!-- <li><a href="home_page.php"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li> -->
 				<li><a href="customer_homepage.php"><i class="fa fa-desktop" aria-hidden="true"></i> Dashboard</a></li>
 				<li><a href="logout_handler.php"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
 			</ul>
@@ -71,26 +71,32 @@
                 $newPhone = $_POST['new_phonenumber']; 	
 				mysqli_stmt_fetch($stmt);
                 if (!empty($newEml)) {
-                    $query="SELECT count(*) FROM user WHERE UserEmail = ?";
-                    $stmt=mysqli_prepare($dbc,$query);
-                    mysqli_stmt_bind_param($stmt,"s",$newEml);
-                    mysqli_stmt_execute($stmt);
-                    mysqli_stmt_bind_result($stmt,$exists);
-                    mysqli_stmt_fetch($stmt);
-                    if ($exists == 1) { 	
-                        mysqli_stmt_fetch($stmt);
-                        echo "<p><strong> Email in use, no change was made <strong></p>";
-                    }
-                    else {
-                        mysqli_stmt_fetch($stmt);
-                        $query = "UPDATE user SET UserEmail = ? WHERE UserEmail = ?";
-                        $stmt=mysqli_prepare($dbc,$query);
-                        mysqli_stmt_bind_param($stmt,"ss", $newEml, $user_name);
-                        mysqli_stmt_execute($stmt);
-                        $_SESSION['login_user'] = $newEml;
-                        $user_name = $newEml;
-                        echo "<p><strong> Changed Email <strong></p>";
-                    }
+                        if(filter_var($newEml, FILTER_VALIDATE_EMAIL)){
+                            $query="SELECT count(*) FROM user WHERE UserEmail = ?";
+                            $stmt=mysqli_prepare($dbc,$query);
+                            mysqli_stmt_bind_param($stmt,"s",$newEml);
+                            mysqli_stmt_execute($stmt);
+                            mysqli_stmt_bind_result($stmt,$exists);
+                            mysqli_stmt_fetch($stmt);
+                            if ($exists == 1) { 	
+                                mysqli_stmt_fetch($stmt);
+                                echo "<p><strong> Email in use, no change was made <strong></p>";
+                            }
+                            else {
+                                mysqli_stmt_fetch($stmt);
+                                $query = "UPDATE user SET UserEmail = ? WHERE UserEmail = ?";
+                                $stmt=mysqli_prepare($dbc,$query);
+                                mysqli_stmt_bind_param($stmt,"ss", $newEml, $user_name);
+                                mysqli_stmt_execute($stmt);
+                                $_SESSION['login_user'] = $newEml;
+                                $user_name = $newEml;
+                                echo "<p><strong> Changed Email <strong></p>";
+                            }
+                        }
+                        else{
+                            echo "Invalid email.";
+                            
+					}
                 }
                 if (!empty($newPass)) {
                     $query = "UPDATE user SET UserPassword = ? WHERE UserEmail = ?";
