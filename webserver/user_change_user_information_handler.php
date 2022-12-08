@@ -110,7 +110,7 @@
                     //parse phonenumber here for length
                     $query = "UPDATE customer SET PhoneNumber = ? WHERE CustomerEmail = ?";
                     $stmt=mysqli_prepare($dbc,$query);
-                    mysqli_stmt_bind_param($stmt,"ss", $newPhone, $user_name);
+                    mysqli_stmt_bind_param($stmt,"is", $newPhone, $user_name);
                     mysqli_stmt_execute($stmt);  
                     echo "<p><strong> Changed Phone Number <strong></p>";     
                 }               
