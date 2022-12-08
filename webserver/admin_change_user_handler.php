@@ -113,10 +113,9 @@
                 mysqli_stmt_bind_result($stmt,$UserEmail, $Name, $Password);
                 mysqli_stmt_fetch($stmt);  
                 echo "<form action=\"admin_change_user_handler2.php\" method=\"post\">";
-                echo "<p><strong> Hello " .$Name. "<strong></p>";
                 echo "<table cellpadding=\"10\">";
                 echo "<tr>";
-                echo "<td class=\"fix_table_short\">Current Email ".$UserEmail."</td>";
+                echo "<td class=\"fix_table_short\">Current Email ".$user_name."</td>";
                 echo "</tr>";
                 echo "<tr>";
                 echo "<td class=\"fix_table_short\">New Email</td>";
