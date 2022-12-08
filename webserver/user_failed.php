@@ -33,38 +33,6 @@
 			</ul>
 		</div>
 		<br>
-		<form class="center_form" action="new_user_form_handler.php" method="POST" id="new_user_from">
-			<h2><i class="fa fa-user-plus" aria-hidden="true"></i> CREATE NEW USER ACCOUNT</h2>
-			<br>
-			<table cellpadding='10'>
-				<strong>ENTER LOGIN DETAILS</strong>
-				<tr>
-					<td>Email Address:</td>
-					<td><input type="text" name="email" required><br><br></td>
-				</tr>
-				<tr>
-					<td>Username: </td>
-					<td><input type="text" name="username" required><br><br></td>
-				</tr>
-				<tr>
-					<td>Password:</td>
-					<td><input type="password" name="password" required><br><br></td>
-				</tr>
-
-			</table>
-			<br>
-
-			<br>
-			<?php
-			if(isset($_GET['msg']) && $_GET['msg']=='failed')
-			{
-				echo "<br>
-				<strong style='color:red'>Invalid Email</strong>
-				<br><br>";
-			}
-				?>
-			<input type="submit" value="Submit" name="Submit">
-			<br>
-		</form>
+		<h3>Oops, invalid email. Try again.</h3>
 	</body>
 </html>

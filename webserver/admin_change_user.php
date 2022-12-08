@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<title>
-			Delete Flight Schedule Details
+			Change User Email
 		</title>
 		<style>
 			input {
@@ -40,27 +40,28 @@
 				<li><a href="logout_handler.php"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
 			</ul>
 		</div>
-		<form action="delete_flight_details_form_handler.php" method="post">
-			<h2>ENTER THE FLIGHT SCHEDULE TO BE DELETED</h2>
+		<form action="admin_change_user_handler.php" method="post">
+			<h2>ENTER THE USER EMAIL YOU WISH TO CHANGE</h2>
 			<div>
 			<?php
 				if(isset($_GET['msg']) && $_GET['msg']=='success')
 				{
-					echo "<strong style='color:green; padding-left:20px;'>The Flight Schedule has been successfully deleted.</strong>
+					echo "<strong style='color:green; padding-left:20px;'>User email has been changed.</strong>
 						<br>
 						<br>";
 				}
 				else if(isset($_GET['msg']) && $_GET['msg']=='failed')
 				{
-					echo "<strong style='color:red; padding-left:20px;'>*Invalid Flight No./Departure Date, please enter again.</strong>
+					echo "<strong style='color:red; padding-left:20px;'>*Invalid user email, try again..</strong>
 						<br>
 						<br>";
 				}
 			?>
+            
 			<table cellpadding="5" style="padding-left: 20px;">
 				<tr>
-					<td class="fix_table">Enter a valid Flight No.</td>
-					<td class="fix_table"><input type="text" name="flight_no" required></td>
+					<td class="fix_table">Enter a valid user email.</td>
+					<td class="fix_table"><input type="text" name="useremail" required></td>
 					<!-- <td class="fix_table">Enter the Departure Date</td> -->
 				</tr>
 				<!-- <tr>
@@ -68,9 +69,10 @@
 					<td class="fix_table"><input type="date" name="departure_date" required></td>
 				</tr> -->
 			</table>
+            
 			<br>
 			<br>
-			<input type="submit" value="Delete" name="Delete">
+			<input type="submit" value="Continue" name="Continue">
 			</div>
 		</form>
 	</body>

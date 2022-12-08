@@ -86,7 +86,7 @@
 					echo "<tr>";
 					echo "<td class=\"fix_table_short\"><input type=\"text\" name=\"pass_id\" required></td>";
 					echo "<td class=\"fix_table_short\"><input type=\"text\" name=\"pass_name\" required></td>";
-					echo "<td class=\"fix_table_short\"><input type=\"number\" name=\"pass_age\" required></td>";
+					echo "<td class=\"fix_table_short\"><input type=\"number\" min=\"1\" max=\"99\" name=\"pass_age\" required></td>";
 					echo "<td class=\"fix_table_short\">";
   					echo "</td>";
   					
@@ -128,7 +128,7 @@
 					echo "<tr>";
 					echo "<td class=\"fix_table_short\"><input type=\"text\" name=\"pass_id\" required></td>";
 					echo "<td class=\"fix_table_short\"><input type=\"text\" name=\"pass_name\" required></td>";
-					echo "<td class=\"fix_table_short\"><input type=\"number\" name=\"pass_age\" required></td>";
+					echo "<td class=\"fix_table_short\"><input type=\"number\" min=\"1\" max=\"99\" name=\"pass_age\" required></td>";
 					echo "<td class=\"fix_table_short\">";
   					echo "</td>";
   					

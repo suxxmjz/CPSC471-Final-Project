@@ -16,7 +16,7 @@
 		</h1>
 		<div>
 			<ul>
-				<li><a href="admin_homepage.php"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+				<!-- <li><a href="admin_home.php"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li> -->
 				<li><a href="admin_homepage.php"><i class="fa fa-desktop" aria-hidden="true"></i> Dashboard</a></li>
 				<li><a href="logout_handler.php"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
 			</ul>
@@ -42,6 +42,14 @@
 			</tr>
 			<tr>
 				<td class="admin_func"><a href="delete_flight_details.php"><i class="fa fa-plane" aria-hidden="true"></i> Delete Flight Schedule Details</a>
+				</td>
+			</tr>
+			<tr>
+				<td class="admin_func"><a href="change_flight_details.php"><i class="fa fa-plane" aria-hidden="true"></i> Change Flight Schedule Details</a>
+				</td>
+			</tr>
+			<tr>
+				<td class="admin_func"><a href="admin_change_user.php"><i class="fa fa-plane" aria-hidden="true"></i> Change User Details</a>
 				</td>
 			</tr>
 			

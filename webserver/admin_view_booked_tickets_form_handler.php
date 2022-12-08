@@ -36,7 +36,7 @@
 		</h1>
 		<div>
 			<ul>
-				<li><a href="admin_homepage.php"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+				<!-- <li><a href="admin_homepage.php"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li> -->
 				<li><a href="admin_homepage.php"><i class="fa fa-desktop" aria-hidden="true"></i> Dashboard</a></li>
 				<li><a href="logout_handler.php"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
 			</ul>
@@ -54,36 +54,96 @@
 
 				
 				$flight_no = $_POST["select_flight"];
-					require_once('Database Connection file/mysqli_connect.php');
-					$query="SELECT TicketID,FlightNumber,CustomerEmail FROM ticket where FlightNumber=?";
-					$stmt=mysqli_prepare($dbc,$query);
-					mysqli_stmt_bind_param($stmt,"s",$flight_no);
-					mysqli_stmt_execute($stmt);
-					mysqli_stmt_bind_result($stmt,$TicketID,$FlightNumber,$CustomerEmail);
-					mysqli_stmt_store_result($stmt);
-					if(mysqli_stmt_num_rows($stmt)==0)
-					{
-						echo "<h3>Flight Empty.</h3>";
-					}
-					else
-					{
-						echo "<table cellpadding=\"10\"";
-						echo "<tr>
-						<th>Flight Number</th>
-						<th>Ticket ID</th>
-						<th>Customer Email</th>
-						</tr>";
-						while(mysqli_stmt_fetch($stmt)) {
-        					echo "<tr>
-							<td>".$FlightNumber."</td>
-							<td>".$TicketID."</td>
-							<td>".$CustomerEmail."</td>
-        					</tr>";
-    					}
-    					echo "</table> <br>";
-    				}
-					mysqli_stmt_close($stmt);
-					mysqli_close($dbc);
+					// require_once('Database Connection file/mysqli_connect.php');
+					// $query="SELECT TicketID,FlightNumber,CustomerEmail FROM ticket where FlightNumber=?";
+					// $stmt=mysqli_prepare($dbc,$query);
+					// mysqli_stmt_bind_param($stmt,"s",$flight_no);
+					// mysqli_stmt_execute($stmt);
+					// mysqli_stmt_bind_result($stmt,$TicketID,$FlightNumber,$CustomerEmail);
+					// mysqli_stmt_store_result($stmt);
+					// if(mysqli_stmt_num_rows($stmt)==0)
+					// {
+					// 	echo "<h3>Flight Empty.</h3>";
+					// }
+					// else
+					// {
+					// 	echo "<table cellpadding=\"10\"";
+					// 	echo "<tr>
+					// 	<th>Flight Number</th>
+					// 	<th>Ticket ID</th>
+					// 	<th>Customer Email</th>
+					// 	</tr>";
+					// 	while(mysqli_stmt_fetch($stmt)) {
+        			// 		echo "<tr>
+					// 		<td>".$FlightNumber."</td>
+					// 		<td>".$TicketID."</td>
+					// 		<td>".$CustomerEmail."</td>
+        			// 		</tr>";
+    				// 	}
+    				// 	echo "</table> <br>";
+    				// }
+					// mysqli_stmt_close($stmt);
+					// mysqli_close($dbc);
+							require_once('Database Connection file/mysqli_connect.php');
+							$query ="SELECT TicketID, CustomerEmail, PackageID, PassengerID FROM (ticket NATURAL JOIN tickettype) WHERE FlightNumber = ?";
+							$query2 ="SELECT PassengerName, PassengerAge FROM passenger WHERE PassengerID = ?";
+							$query3 ="SELECT Weight,ReceiverName,SenderName FROM package WHERE PackageID = ?";
+							$stmt=mysqli_prepare($dbc,$query);
+							$stmt2 = mysqli_prepare($dbc, $query2);
+							$stmt3 = mysqli_prepare($dbc, $query3);
+							mysqli_stmt_bind_param($stmt,"i",$flight_no);
+							mysqli_stmt_execute($stmt);
+							mysqli_stmt_bind_result($stmt,$TicketID, $CustomerEmail, $PackageID, $PassengerID);
+							mysqli_stmt_store_result($stmt);
+							echo "<h3>Tickets List</h3>";
+							echo "<table cellpadding=\"10\"";
+							echo "<tr>
+							<th>Customer Email</th>
+							<th>Ticket ID</th>
+							<th>Ticket Type</th>
+							</tr>";
+							while(mysqli_stmt_fetch($stmt)) {
+								if (!empty($PassengerID)) {
+									mysqli_stmt_bind_param($stmt2,"s",$PassengerID);
+									mysqli_stmt_execute($stmt2);
+									mysqli_stmt_bind_result($stmt2, $PassengerName, $PassengerAge);
+									mysqli_stmt_store_result($stmt2);	
+									mysqli_stmt_fetch($stmt2);								
+									echo "<tr>
+									<td>".$CustomerEmail."</td>
+									<td>".$TicketID."</td>
+									<td> Passenger </td>
+									<td><input type=\"radio\" name=\"select_ticket\" value=\"".$TicketID." \"></td>
+									</tr>
+									<tr>
+									<td>Passenger ID ".$PassengerID."</td>
+									<td>Passenger Name ".$PassengerName."</td>
+									<td>Passenger Age ".$PassengerAge."</td>
+									</tr>";					
+								}
+								else {
+									mysqli_stmt_bind_param($stmt3,"s",$PackageID);
+									mysqli_stmt_execute($stmt3);
+									mysqli_stmt_bind_result($stmt3,$Weight, $ReceiverName, $SenderName);
+									mysqli_stmt_store_result($stmt3);
+									mysqli_stmt_fetch($stmt3);	
+									echo "<tr>
+									<td>".$CustomerEmail."</td>
+									<td>".$TicketID."</td>
+									<td> Package </td>
+									<td><input type=\"radio\" name=\"select_ticket\" value=\"".$TicketID." \"></td>
+									</tr>
+									<tr>
+									<td>Package ID ".$PackageID."</td>
+									<td>Package Weight ".$Weight."</td>
+									<td>Package Receiver ".$ReceiverName."</td>
+									</tr>";		
+								}
+							}
+							echo "</table> <br>";
+							mysqli_stmt_close($stmt);
+							mysqli_stmt_close($stmt2);
+							mysqli_close($dbc);
 		?>
 	</body>
 </html>
