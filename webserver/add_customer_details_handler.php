@@ -62,7 +62,7 @@
 			$city = trim($_POST['customer_city']);
 			$province = trim($_POST['customer_province']);
 			require_once('Database Connection file/mysqli_connect.php');
-			$query= "INSERT INTO customer VALUES (?,?,?,?,?,?)";
+			$query= "INSERT INTO customer(CustomerEmail, PhoneNumber, Province, City, BuildingNum, Community) VALUES (?,?,?,?,?,?)";
 			$stmt=mysqli_prepare($dbc,$query);
 			mysqli_stmt_bind_param($stmt,"sissis",$user_name, $phone_number, $province, $city, $building_number, $community);
 			mysqli_stmt_execute($stmt);	
