@@ -150,7 +150,7 @@
 							echo "<tr>
 							<td>".$x."</td>
 							<td> Economy </td>
-							<td><input type=\"radio\" name=\"select_seat\" value=\"".$x." \"></td>
+							<td><input type=\"radio\" name=\"select_seat\" value=\"".$x." \" required></td>
 							</tr>";
 						}
 					}
