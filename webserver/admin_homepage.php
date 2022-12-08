@@ -37,6 +37,11 @@
 				</td>
 			</tr>
 			<tr>
+				<td class="admin_func"><a href="view_flight_details.php"><i class="fa fa-plane" aria-hidden="true"></i> View Flight Schedule Details</a>
+				</td>
+			</tr>
+
+			<tr>
 				<td class="admin_func"><a href="add_flight_details.php"><i class="fa fa-plane" aria-hidden="true"></i> Add Flight Schedule Details</a>
 				</td>
 			</tr>
