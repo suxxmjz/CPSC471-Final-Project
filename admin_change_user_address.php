@@ -45,7 +45,7 @@
         <h2>Change Address</h2>
 		<?php
 			echo "<form action=\"admin_change_user_address_handler.php\" method=\"post\">";
-            echo "<p><strong>Package <strong></p>";
+
             echo "<table cellpadding=\"10\">";
             echo "<tr>";
             echo "<td class=\"fix_table_short\">Building Number</td>";
