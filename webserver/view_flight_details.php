@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<title>
-			View Booked Tickets
+			View Available Flights
 		</title>
 		<style>
 			input {
@@ -17,12 +17,17 @@
 				color: white;
     			border-radius: 4px;
     			padding: 7px 45px;
-    			margin: 0% 15.8%
+    			margin: 0px 127px
 			}
 			input[type=date] {
 				border: 1.5px solid #dd6a1fa1;
     			border-radius: 4px;
     			padding: 5.5px 44.5px;
+			}
+			select {
+    			border: 1.5px solid #dd6a1fa1;
+    			border-radius: 4px;
+    			padding: 6.5px 75.5px;
 			}
 		</style>
 		<link rel="stylesheet" type="text/css" href="css/style.css"/>
@@ -35,25 +40,34 @@
 		</h1>
 		<div>
 			<ul>
-				<!-- <li><a href="admin_homepage.php"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li> -->
 				<li><a href="admin_homepage.php"><i class="fa fa-desktop" aria-hidden="true"></i> Dashboard</a></li>
 				<li><a href="logout_handler.php"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
 			</ul>
 		</div>
-		<form action="view_user_information_and_tickets_handler.php" method="post">
-			<h2>VIEW CUSTOMER INFORMATION</h2>
-			<div>
+		<form action="view_flight_details_handler.php" method="post">
+			<h2>SEARCH FOR ALL FLIGHTS ON A DAY</h2>
+			<br>
 			<table cellpadding="5">
 				<tr>
-					<td class="fix_table">Enter the Customer Email.</td>
-					<td class="fix_table"><input type="text" name="customer_email" required></td>
-			
+					<td class="fix_table">Enter the Departure Date</td>
+				</tr>
+				<tr>
+					<td class="fix_table"><input type="date" name="dep_date" min=
+						<?php 
+							$todays_date=date('Y-m-d'); 
+							echo $todays_date;
+						?> 
+						max=
+						<?php 
+							$max_date=date_create(date('Y-m-d'));
+							date_add($max_date,date_interval_create_from_date_string("90 days")); 
+							echo date_format($max_date,"Y-m-d");
+						?> required></td>
 				</tr>
 			</table>
 			<br>
 			<br>
-			<input type="submit" value="Submit" name="Submit">
-			</div>
+			<input type="submit" value="Search for Available Flights" name="Search">
 		</form>
 	</body>
 </html>

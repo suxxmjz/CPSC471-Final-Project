@@ -49,7 +49,7 @@
 		</h1>
 		<div>
 			<ul>
-				<li><a href="home_page.php"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+				<!-- <li><a href="home_page.php"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li> -->
 				<li><a href="customer_homepage.php"><i class="fa fa-desktop" aria-hidden="true"></i> Dashboard</a></li>
 				<li><a href="logout_handler.php"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
 			</ul>
@@ -86,7 +86,7 @@
 					echo "<tr>";
 					echo "<td class=\"fix_table_short\"><input type=\"text\" name=\"pass_id\" required></td>";
 					echo "<td class=\"fix_table_short\"><input type=\"text\" name=\"pass_name\" required></td>";
-					echo "<td class=\"fix_table_short\"><input type=\"number\" name=\"pass_age\" required></td>";
+					echo "<td class=\"fix_table_short\"><input type=\"number\" min=\"1\" max=\"99\" name=\"pass_age\" required></td>";
 					echo "<td class=\"fix_table_short\">";
   					echo "</td>";
   					
@@ -128,7 +128,7 @@
 					echo "<tr>";
 					echo "<td class=\"fix_table_short\"><input type=\"text\" name=\"pass_id\" required></td>";
 					echo "<td class=\"fix_table_short\"><input type=\"text\" name=\"pass_name\" required></td>";
-					echo "<td class=\"fix_table_short\"><input type=\"number\" name=\"pass_age\" required></td>";
+					echo "<td class=\"fix_table_short\"><input type=\"number\" min=\"1\" max=\"99\" name=\"pass_age\" required></td>";
 					echo "<td class=\"fix_table_short\">";
   					echo "</td>";
   					
@@ -150,7 +150,7 @@
 							echo "<tr>
 							<td>".$x."</td>
 							<td> Economy </td>
-							<td><input type=\"radio\" name=\"select_seat\" value=\"".$x." \"></td>
+							<td><input type=\"radio\" name=\"select_seat\" value=\"".$x." \" required></td>
 							</tr>";
 						}
 					}

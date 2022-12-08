@@ -1,116 +1,72 @@
-<!-- NOT IMPLEMENTED YET -->
-
-
 <?php
 	session_start();
 ?>
 <html>
 	<head>
 		<title>
-			Cancel Booked Tickets
+			Enter Travel/Ticket Details
 		</title>
+		<style>
+			input {
+    			border: 1.5px solid #dd6a1fa1;
+    			border-radius: 4px;
+    			padding: 7px 10px;
+			}
+			input[type=number] {
+    			border: 1.5px solid #dd6a1fa1;
+    			border-radius: 4px;
+    			padding: 7px 0px;
+			}
+			input[type=submit] {
+				background-color: #dd6a1fa1;
+				color: white;
+    			border-radius: 4px;
+    			padding: 7px 45px;
+    			margin: 0px 500px
+			}
+			input[type=radio] {
+    			margin-right: 30px;
+			}
+			select {
+    			border: 1.5px solid #dd6a1fa1;
+    			border-radius: 4px;
+    			padding: 6.5px 15px;
+			}
+			table {
+			 border-collapse: collapse; 
+			}
+			tr/*:nth-child(3)*/ {
+			 border: solid thin;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+		<link rel="stylesheet" href="font-awesome-4.7.0\css\font-awesome.min.css">
 	</head>
 	<body>
+		<img class="logo" src="images/logo.jpg"/> 
+		<h1 id="title">
+			SUJACA AIRLINES
+		</h1>
+		<div>
+			<ul>
+				<!-- <li><a href="home_page.php"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li> -->
+				<li><a href="customer_homepage.php"><i class="fa fa-desktop" aria-hidden="true"></i> Dashboard</a></li>
+				<li><a href="logout_handler.php"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
+			</ul>
+		</div>
+		<title>
+			Cancel Booked Tickets
+		</title>
 		<?php
-			if(isset($_POST['Cancel_Ticket']))
-			{
-				$data_missing=array();
-				if(empty($_POST['pnr']))
-				{
-					$data_missing[]='PNR';
-				}
-				else
-				{
-					$pnr=trim($_POST['pnr']);
-				}
-
-				if(empty($data_missing))
-				{
-					require_once('Database Connection file/mysqli_connect.php');
-
-					$todays_date=date('Y-m-d'); 
-					$customer_id=$_SESSION['login_user'];
-
-					$query="SELECT count(*) from Ticket_Details t WHERE pnr=? and journey_date>=?";
-					$stmt=mysqli_prepare($dbc,$query);
-					mysqli_stmt_bind_param($stmt,"ss",$pnr,$todays_date);
-					mysqli_stmt_execute($stmt);
-					mysqli_stmt_bind_result($stmt,$cnt);
-					mysqli_stmt_fetch($stmt);
-					mysqli_stmt_close($stmt);
-					if($cnt!=1)
-					{
-						mysqli_close($dbc);
-						header("location: cancel_booked_tickets.php?msg=failed");
-					}
-					$query="UPDATE Ticket_Details SET booking_status='CANCELED' WHERE pnr=? and customer_id=?";
-					$stmt=mysqli_prepare($dbc,$query);
-					mysqli_stmt_bind_param($stmt,"ss",$pnr,$customer_id);
-					mysqli_stmt_execute($stmt);
-					$affected_rows=mysqli_stmt_affected_rows($stmt);
-					mysqli_stmt_close($stmt);
-					if($affected_rows==1)
-					{
-						$query="SELECT t.flight_no,t.journey_date,t.no_of_passengers,t.class,0.85*p.payment_amount as refund_amount from Ticket_Details t,Payment_Details p WHERE t.pnr=? and t.pnr=p.pnr";
-						$stmt=mysqli_prepare($dbc,$query);
-						mysqli_stmt_bind_param($stmt,"s",$pnr);
-						mysqli_stmt_execute($stmt);
-						mysqli_stmt_bind_result($stmt,$flight_no,$journey_date,$no_of_pass,$class,$refund_amount);
-						mysqli_stmt_fetch($stmt);
-						mysqli_stmt_close($stmt);
-						$_SESSION['refund_amount']=$refund_amount;
-						if($class=='economy')
-						{
-							$query="UPDATE Flight_Details SET seats_economy=seats_economy+? WHERE flight_no=? AND departure_date=?";
-							$stmt=mysqli_prepare($dbc,$query);
-							mysqli_stmt_bind_param($stmt,"iss",$no_of_pass,$flight_no,$journey_date);
-							mysqli_stmt_execute($stmt);
-							$affected_rows_1=mysqli_stmt_affected_rows($stmt);
-							echo $affected_rows_1.'<br>';
-							mysqli_stmt_close($stmt);
-						}
-						else if($class=='business')
-						{
-							$query="UPDATE Flight_Details SET seats_business=seats_business+? WHERE flight_no=? AND departure_date=?";
-							$stmt=mysqli_prepare($dbc,$query);
-							mysqli_stmt_bind_param($stmt,"iss",$no_of_pass,$flight_no,$journey_date);
-							mysqli_stmt_execute($stmt);
-							$affected_rows_1=mysqli_stmt_affected_rows($stmt);
-							echo $affected_rows_1.'<br>';
-							mysqli_stmt_close($stmt);
-						}
-						if($affected_rows_1==1)
-						{
-
-							header("location: cancel_booked_tickets_success.php");
-						}
-						else
-						{
-							echo "Submit Error";
-							echo mysqli_error();
-						}
-					}
-					else
-					{
-						echo "Submit Error";
-						echo mysqli_error();
-						header("location: cancel_booked_tickets.php?msg=failed");
-					}
-					mysqli_close($dbc);
-				}
-				else
-				{
-					echo "The following data fields were empty! <br>";
-					foreach($data_missing as $missing)
-					{
-						echo $missing ."<br>";
-					}
-				}
-			}
-			else
-			{
-				echo "Cancel request not received";
-			}
+			require_once('Database Connection file/mysqli_connect.php');
+			$TicketID = $_POST['select_ticket'];
+			$query="DELETE FROM ticket WHERE TicketID = ?";
+			$stmt=mysqli_prepare($dbc,$query);
+			mysqli_stmt_bind_param($stmt,"i", $TicketID);
+			mysqli_stmt_execute($stmt);
+			echo "<h2>CANCEL BOOKED TICKETS</h2>
+			<h3 style='padding-left: 40px;'>Your ticket has been cancelled successfully.</td>
+			</h3>";
 		?>
 	</body>
 </html>

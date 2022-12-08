@@ -1,138 +1,128 @@
-<!-- NOT IMPLEMENTED YET -->
 <?php
 	session_start();
 ?>
 <html>
 	<head>
 		<title>
-			View Booked Tickets
+			Enter Travel/Ticket Details
 		</title>
 		<style>
 			input {
-    			border: 1.5px solid #030337;
+    			border: 1.5px solid #dd6a1fa1;
     			border-radius: 4px;
-    			padding: 7px 30px;
+    			padding: 7px 10px;
+			}
+			input[type=number] {
+    			border: 1.5px solid #dd6a1fa1;
+    			border-radius: 4px;
+    			padding: 7px 0px;
 			}
 			input[type=submit] {
-				background-color: #030337;
+				background-color: #dd6a1fa1;
 				color: white;
     			border-radius: 4px;
     			padding: 7px 45px;
-    			margin: 0px 390px
+    			margin: 0px 500px
+			}
+			input[type=radio] {
+    			margin-right: 30px;
+			}
+			select {
+    			border: 1.5px solid #dd6a1fa1;
+    			border-radius: 4px;
+    			padding: 6.5px 15px;
 			}
 			table {
 			 border-collapse: collapse; 
-			 margin-left: 10%;
-			 margin-right: 10%;
 			}
 			tr/*:nth-child(3)*/ {
 			 border: solid thin;
-			}
-			.set_nice_size{
-				font-size: 17pt;
 			}
 		</style>
 		<link rel="stylesheet" type="text/css" href="css/style.css"/>
 		<link rel="stylesheet" href="font-awesome-4.7.0\css\font-awesome.min.css">
 	</head>
 	<body>
-		<img class="logo" src="images/shutterstock_22.jpg"/> 
+		<img class="logo" src="images/logo.jpg"/> 
 		<h1 id="title">
 			SUJACA AIRLINES
 		</h1>
 		<div>
 			<ul>
-				<li><a href="customer_homepage.php"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+				<!-- <li><a href="home_page.php"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li> -->
 				<li><a href="customer_homepage.php"><i class="fa fa-desktop" aria-hidden="true"></i> Dashboard</a></li>
 				<li><a href="logout_handler.php"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
 			</ul>
 		</div>
-		<h2>VIEW BOOKED FLIGHT TICKETS</h2>
-		<h3 class='set_nice_size'><center><u>Upcoming Trips</u></center></h3>
+		<h2>VIEW BOOKED TICKETS</h2>
 		<?php
-			$todays_date=date('Y-m-d');
-			$thirty_days_before_date=date_create(date('Y-m-d'));
-			date_sub($thirty_days_before_date,date_interval_create_from_date_string("30 days")); 
-			$thirty_days_before_date=date_format($thirty_days_before_date,"Y-m-d");
-			
-			$customer_id=$_SESSION['login_user'];
-			require_once('Databse Connection File/mysqli_connect.php');
-			$query="SELECT pnr,date_of_reservation,flight_no,journey_date,class,booking_status,no_of_passengers,payment_id FROM Ticket_Details where customer_id=? AND journey_date>=? AND booking_status='CONFIRMED' ORDER BY  journey_date";
-			$stmt=mysqli_prepare($dbc,$query);
-			mysqli_stmt_bind_param($stmt,"ss",$customer_id,$todays_date);
-			mysqli_stmt_execute($stmt);
-			mysqli_stmt_bind_result($stmt,$pnr,$date_of_reservation,$flight_no,$journey_date,$class,$booking_status,$no_of_passengers,$payment_id);
-			mysqli_stmt_store_result($stmt);
-			if(mysqli_stmt_num_rows($stmt)==0)
-			{
-				echo "<h3><center>No upcoming trips!</center></h3>";
-			}
-			else
-			{
-				echo "<table cellpadding=\"10\"";
-				echo "<tr><th>PNR</th>
-				<th>Date of Reservation</th>
-				<th>Flight No.</th>
-				<th>Journey Date</th>
-				<th>Class</th>
-				<th>Booking Status</th>
-				<th>No. of Passengers</th>
-				<th>Payment ID</th>
-				</tr>";
-				while(mysqli_stmt_fetch($stmt)) {
-        			echo "<tr>
-        			<td>".$pnr."</td>
-        			<td>".$date_of_reservation."</td>
-					<td>".$flight_no."</td>
-					<td>".$journey_date."</td>
-					<td>".$class."</td>
-					<td>".$booking_status."</td>
-					<td>".$no_of_passengers."</td>
-					<td>".$payment_id."</td>
-        			</tr>";
-    			}
-    			echo "</table> <br>";
-			}
-			echo "<br><h3 class=\"set_nice_size\"><center><u>Completed Trips</u></center></h3>";
+					echo "<form action=\"change_ticket_redirect.php\" method=\"post\">";
+							$customer_email=$_SESSION['login_user'];
+							require_once('Database Connection file/mysqli_connect.php');
+							$query ="SELECT TicketID, FlightNumber, PackageID, PassengerID FROM (ticket NATURAL JOIN tickettype) WHERE CustomerEmail = ?";
+							$query2 ="SELECT PassengerName, PassengerAge, SeatNumber FROM (passenger NATURAL JOIN seat) WHERE PassengerID = ?";
+							$query3 ="SELECT Weight,ReceiverName,SenderName FROM package WHERE PackageID = ?";
+							$stmt=mysqli_prepare($dbc,$query);
+							$stmt2 = mysqli_prepare($dbc, $query2);
+							$stmt3 = mysqli_prepare($dbc, $query3);
+							mysqli_stmt_bind_param($stmt,"s",$customer_email);
+							mysqli_stmt_execute($stmt);
+							mysqli_stmt_bind_result($stmt,$TicketID, $FlightNumber, $PackageID, $PassengerID);
+							mysqli_stmt_store_result($stmt);
+							echo "<h3>Tickets List</h3>";
+							echo "<table cellpadding=\"10\"";
+							echo "<tr>
+							<th>Flight Number</th>
+							<th>Ticket ID</th>
+							<th>Ticket Type</th>
+							</tr>";
+							while(mysqli_stmt_fetch($stmt)) {
+								if (!empty($PassengerID)) {
+									mysqli_stmt_bind_param($stmt2,"s",$PassengerID);
+									mysqli_stmt_execute($stmt2);
+									mysqli_stmt_bind_result($stmt2, $PassengerName, $PassengerAge, $SeatNumber);
+									mysqli_stmt_store_result($stmt2);	
+									mysqli_stmt_fetch($stmt2);								
+									echo "<tr>
+									<td>".$FlightNumber."</td>
+									<td>".$TicketID."</td>
+									<td> Passenger </td>
+									<td><input type=\"radio\" name=\"select_ticket\" value=\"".$TicketID." \"required></td>
+									</tr>
+									<tr>
+									<td>Passenger ID ".$PassengerID."</td>
+									<td>Passenger Name ".$PassengerName."</td>
+									<td>Passenger Age ".$PassengerAge."</td>
+									<td>Seat Number ".$SeatNumber. "</td>
+									</tr>";					
+								}
+								else {
+									mysqli_stmt_bind_param($stmt3,"s",$PackageID);
+									mysqli_stmt_execute($stmt3);
+									mysqli_stmt_bind_result($stmt3,$Weight, $ReceiverName, $SenderName);
+									mysqli_stmt_store_result($stmt3);
+									mysqli_stmt_fetch($stmt3);	
+									echo "<tr>
+									<td>".$FlightNumber."</td>
+									<td>".$TicketID."</td>
+									<td> Package </td>
+									<td><input type=\"radio\" name=\"select_ticket\" value=\"".$TicketID." \"required></td>
+									</tr>
+									<tr>
+									<td>Package ID ".$PackageID."</td>
+									<td>Package Weight ".$Weight."</td>
+									<td>Package Receiver ".$ReceiverName."</td>
+									</tr>";		
+								}
+							}
+							echo "</table> <br>";
+							mysqli_stmt_close($stmt);
+							mysqli_stmt_close($stmt2);
+							mysqli_stmt_close($stmt3);
+							mysqli_close($dbc);
+							echo "<input type=\"submit\" value=\"Change Ticket\" name=\"Select\">";
+							echo "</form>";
 
-			$query="SELECT pnr,date_of_reservation,flight_no,journey_date,class,booking_status,no_of_passengers,payment_id FROM Ticket_Details where customer_id=? and journey_date<? and journey_date>=? ORDER BY  journey_date";
-			$stmt=mysqli_prepare($dbc,$query);
-			mysqli_stmt_bind_param($stmt,"sss",$customer_id,$todays_date,$thirty_days_before_date);
-			mysqli_stmt_execute($stmt);
-			mysqli_stmt_bind_result($stmt,$pnr,$date_of_reservation,$flight_no,$journey_date,$class,$booking_status,$no_of_passengers,$payment_id);
-			mysqli_stmt_store_result($stmt);
-			if(mysqli_stmt_num_rows($stmt)==0)
-			{
-				echo "<h3><center>No trips completed in the past 30 days!</center></h3>";
-			}
-			else
-			{
-				echo "<table cellpadding=\"10\"";
-				echo "<tr><th>PNR</th>
-				<th>Date of Reservation</th>
-				<th>Flight No.</th>
-				<th>Journey Date</th>
-				<th>Class</th>
-				<th>Booking Status</th>
-				<th>No. of Passengers</th>
-				<th>Payment ID</th>
-				</tr>";
-				while(mysqli_stmt_fetch($stmt)) {
-        			echo "<tr>
-        			<td>".$pnr."</td>
-        			<td>".$date_of_reservation."</td>
-					<td>".$flight_no."</td>
-					<td>".$journey_date."</td>
-					<td>".$class."</td>
-					<td>".$booking_status."</td>
-					<td>".$no_of_passengers."</td>
-					<td>".$payment_id."</td>
-        			</tr>";
-    			}
-    			echo "</table> <br>";
-			}
-			mysqli_stmt_close($stmt);
-			mysqli_close($dbc);
 		?>
 	</body>
 </html>

@@ -62,9 +62,9 @@
 			$city = trim($_POST['customer_city']);
 			$province = trim($_POST['customer_province']);
 			require_once('Database Connection file/mysqli_connect.php');
-			$query= "INSERT INTO customer(CustomerEmail, PhoneNumber, Province, City, BuildingNum, Community) VALUES (?,?,?,?,?,?)";
+			$query= "INSERT INTO customer VALUES (?,?,?,?,?,?)";
 			$stmt=mysqli_prepare($dbc,$query);
-			mysqli_stmt_bind_param($stmt,"sissis",$user_name, $phone_number, $province, $city, $building_number, $community);
+			mysqli_stmt_bind_param($stmt,"sisiss",$user_name, $phone_number, $province, $city, $building_number, $community);
 			mysqli_stmt_execute($stmt);	
 			echo "<h2>Congrats you are now a customer " .$user_name. "</h2>";
 			echo "<form action=\"add_ticket_details_form_handler.php\" method=\"post\">";

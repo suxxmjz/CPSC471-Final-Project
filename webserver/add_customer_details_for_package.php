@@ -55,11 +55,11 @@
 			</ul>
 		</div>
 		<?php
-			$_SESSION['select_seat'] = trim($_POST['select_seat']);
-			$_SESSION['pass_id'] = trim($_POST['pass_id']);
-			$_SESSION['pass_name'] = trim($_POST['pass_name']);
-			$_SESSION['pass_age'] = trim($_POST['pass_age']);
-            echo "<form action=\"add_customer_details_handler.php\" method=\"post\">";
+			$_SESSION['weight'] = trim($_POST['weight']);
+			$_SESSION['receiver_name'] = trim($_POST['receiver_name']);
+			$_SESSION['sender_name'] = trim($_POST['sender_name']);
+			require_once('Database Connection file/mysqli_connect.php');
+            echo "<form action=\"add_customer_details_for_package_handler.php\" method=\"post\">";
             echo "<p><strong>Signup as Customer<strong></p>";
             echo "<p><strong>Enter your information<strong></p>";
             echo "<table cellpadding=\"10\">";

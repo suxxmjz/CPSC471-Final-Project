@@ -40,13 +40,13 @@
 				<li><a href="logout_handler.php"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
 			</ul>
 		</div>
-		<form action="view_user_information_and_tickets_handler.php" method="post">
-			<h2>VIEW CUSTOMER INFORMATION</h2>
+		<form action="admin_cancel_booked_ticket_handler.php" method="post">
+			<h2>CANCEL BOOKED TICKET</h2>
 			<div>
 			<table cellpadding="5">
 				<tr>
-					<td class="fix_table">Enter the Customer Email.</td>
-					<td class="fix_table"><input type="text" name="customer_email" required></td>
+					<td class="fix_table">Enter the TicketID.</td>
+					<td class="fix_table"><input type="text" name="select_ticket" required></td>
 			
 				</tr>
 			</table>

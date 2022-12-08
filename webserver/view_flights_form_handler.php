@@ -37,7 +37,7 @@
 		</h1>
 		<div>
 			<ul>
-				<li><a href="home_page.php"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+				<!-- <li><a href="home_page.php"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li> -->
 				<li><a href="customer_homepage.php"><i class="fa fa-desktop" aria-hidden="true"></i> Dashboard</a></li>
 				<li><a href="logout_handler.php"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
 			</ul>
@@ -107,7 +107,7 @@
 								<td>".$EndTime."</td>
 								<td>".$Destination."</td>
 								<td>".$Source."</td>
-								<td><input type=\"radio\" name=\"select_flight\" value=\"".$FlightNumber."\"></td>
+								<td><input type=\"radio\" name=\"select_flight\" value=\"".$FlightNumber."\"required></td>
         						</tr>";
     						}
     						echo "</table> <br>";
