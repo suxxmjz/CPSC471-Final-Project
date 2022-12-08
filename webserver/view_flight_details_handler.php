@@ -79,7 +79,6 @@
 							<th>Arrival Time</th>
 							<th>Destination</th>
 							<th>Origin</th>	
-							<th>Select</th>
 							</tr>";
 							while(mysqli_stmt_fetch($stmt)) {
         						echo "<tr>

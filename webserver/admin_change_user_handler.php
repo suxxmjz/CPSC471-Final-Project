@@ -47,6 +47,14 @@
         $user_name = $_POST['useremail'];
 		$_SESSION['useremail'] = $user_name;
         	require_once('Database Connection file/mysqli_connect.php');
+			$query = "SELECT COUNT(*) FROM user WHERE UserEmail = ?";
+			$stmt=mysqli_prepare($dbc,$query);
+			mysqli_stmt_bind_param($stmt,"s",$user_name);
+			mysqli_stmt_execute($stmt);
+			mysqli_stmt_bind_result($stmt,$exists);
+			mysqli_stmt_fetch($stmt);
+			if ($exists == 1) {
+				mysqli_stmt_fetch($stmt);
             $query="SELECT count(*) FROM customer WHERE CustomerEmail = ?";
             $stmt=mysqli_prepare($dbc,$query);
             mysqli_stmt_bind_param($stmt,"s",$user_name);
@@ -139,6 +147,12 @@
             }
             mysqli_stmt_close($stmt);
             mysqli_close($dbc);
+		}
+		else {
+			echo " <h2>Account Does Not Exist</h2>";
+
+		}
+
                 ?>
             </body>
 </html>

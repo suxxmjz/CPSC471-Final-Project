@@ -40,7 +40,7 @@
 					require_once('Database Connection file/mysqli_connect.php');
 					$query="UPDATE flight SET StartTime = ?, EndTime = ? WHERE FlightNumber=?";
 					$stmt=mysqli_prepare($dbc,$query);
-					mysqli_stmt_bind_param($stmt,"sss",$dep_time,$arr_time,$flight_no);
+					mysqli_stmt_bind_param($stmt,"ssi",$dep_time,$arr_time,$flight_no);
 					mysqli_stmt_execute($stmt);
 					$affected_rows=mysqli_stmt_affected_rows($stmt);
 					//echo $affected_rows."<br>";
