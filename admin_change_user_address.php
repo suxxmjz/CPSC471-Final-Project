@@ -1,4 +1,4 @@
-<!-- NOT IMPLEMENTED YET -->
+
 <?php
 	session_start();
 ?>
