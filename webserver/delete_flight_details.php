@@ -59,7 +59,7 @@
 			?>
 			<table cellpadding="5" style="padding-left: 20px;">
 				<tr>
-					<td class="fix_table">Enter a valid Flight No.</td>
+					<td class="fix_table">Enter a Valid Flight No.</td>
 					<td class="fix_table"><input type="text" name="flight_no" required></td>
 					<!-- <td class="fix_table">Enter the Departure Date</td> -->
 				</tr>

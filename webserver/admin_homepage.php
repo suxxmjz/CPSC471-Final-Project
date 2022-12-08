@@ -29,11 +29,11 @@
 				</td>
 			</tr> -->
 			 <tr>
-				<td class="admin_func"><a href="admin_view_all.php"><i class="fa fa-plane" aria-hidden="true"></i> View Tickets for Flight</a>
+				<td class="admin_func"><a href="admin_view_all.php"><i class="fa fa-plane" aria-hidden="true"></i> View Or Change Tickets for Flight</a>
 				</td>
 			</tr>
 			<tr>
-				<td class="admin_func"><a href="view_user_information_and_tickets.php"><i class="fa fa-plane" aria-hidden="true"></i> View User Infomation and Tickets</a>
+				<td class="admin_func"><a href="view_user_information_and_tickets.php"><i class="fa fa-plane" aria-hidden="true"></i> View or Change User Tickets</a>
 				</td>
 			</tr>
 			<tr>
@@ -49,7 +49,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="admin_func"><a href="admin_change_user.php"><i class="fa fa-plane" aria-hidden="true"></i> Change User Details</a>
+				<td class="admin_func"><a href="admin_change_user.php"><i class="fa fa-plane" aria-hidden="true"></i> Change User Account Information</a>
 				</td>
 			</tr>
 			
