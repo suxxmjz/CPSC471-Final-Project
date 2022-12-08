@@ -107,7 +107,7 @@
 								<td>".$EndTime."</td>
 								<td>".$Destination."</td>
 								<td>".$Source."</td>
-								<td><input type=\"radio\" name=\"select_flight\" value=\"".$FlightNumber."\"></td>
+								<td><input type=\"radio\" name=\"select_flight\" value=\"".$FlightNumber."\"required></td>
         						</tr>";
     						}
     						echo "</table> <br>";
