@@ -37,7 +37,7 @@
 		</h1>
 		<div>
 			<ul>
-				<li><a href="home_page.php"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+				<!-- <li><a href="home_page.php"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li> -->
 				<li><a href="admin_homepage.php"><i class="fa fa-desktop" aria-hidden="true"></i> Dashboard</a></li>
 				<li><a href="logout_handler.php"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
 			</ul>
@@ -47,6 +47,14 @@
         $user_name = $_POST['useremail'];
 		$_SESSION['useremail'] = $user_name;
         	require_once('Database Connection file/mysqli_connect.php');
+			$query = "SELECT COUNT(*) FROM user WHERE UserEmail = ?";
+			$stmt=mysqli_prepare($dbc,$query);
+			mysqli_stmt_bind_param($stmt,"s",$user_name);
+			mysqli_stmt_execute($stmt);
+			mysqli_stmt_bind_result($stmt,$exists);
+			mysqli_stmt_fetch($stmt);
+			if ($exists == 1) {
+				mysqli_stmt_fetch($stmt);
             $query="SELECT count(*) FROM customer WHERE CustomerEmail = ?";
             $stmt=mysqli_prepare($dbc,$query);
             mysqli_stmt_bind_param($stmt,"s",$user_name);
@@ -89,7 +97,7 @@
                 echo "<td class=\"fix_table_short\">New Phone Number</td>";
                 echo "</tr>";
                 echo "<tr>";
-                echo "<td class=\"fix_table_short\"><input type=\"text\" name=\"new_phonenumber\" ></td>";
+                echo "<td class=\"fix_table_short\"><input type=\"number\" min=\"1000000000\" max=\"9999999999\" name=\"new_phonenumber\" ></td>";
                 echo "<td class=\"fix_table_short\">";
                 echo "</td>";
                 echo "</tr>";
@@ -113,10 +121,9 @@
                 mysqli_stmt_bind_result($stmt,$UserEmail, $Name, $Password);
                 mysqli_stmt_fetch($stmt);  
                 echo "<form action=\"admin_change_user_handler2.php\" method=\"post\">";
-                echo "<p><strong> Hello " .$Name. "<strong></p>";
                 echo "<table cellpadding=\"10\">";
                 echo "<tr>";
-                echo "<td class=\"fix_table_short\">Current Email ".$UserEmail."</td>";
+                echo "<td class=\"fix_table_short\">Current Email ".$user_name."</td>";
                 echo "</tr>";
                 echo "<tr>";
                 echo "<td class=\"fix_table_short\">New Email</td>";
@@ -140,6 +147,11 @@
             }
             mysqli_stmt_close($stmt);
             mysqli_close($dbc);
+		}
+		else {
+			echo " <h2>Account Does Not Exist</h2>";
+
+		}
                 ?>
             </body>
 </html>

@@ -49,7 +49,7 @@
 		</h1>
 		<div>
 			<ul>
-				<li><a href="home_page.php"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+				<!-- <li><a href="home_page.php"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li> -->
 				<li><a href="customer_homepage.php"><i class="fa fa-desktop" aria-hidden="true"></i> Dashboard</a></li>
 				<li><a href="logout_handler.php"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
 			</ul>
@@ -62,7 +62,7 @@
 			$city = trim($_POST['customer_city']);
 			$province = trim($_POST['customer_province']);
 			require_once('Database Connection file/mysqli_connect.php');
-			$query= "INSERT INTO customer VALUES (?,?,?,?,?,?)";
+			$query= "INSERT INTO customer(CustomerEmail, PhoneNumber, Province, City, BuildingNum, Community) VALUES (?,?,?,?,?,?)";
 			$stmt=mysqli_prepare($dbc,$query);
 			mysqli_stmt_bind_param($stmt,"sissis",$user_name, $phone_number, $province, $city, $building_number, $community);
 			mysqli_stmt_execute($stmt);	

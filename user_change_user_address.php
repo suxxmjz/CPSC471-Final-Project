@@ -37,7 +37,7 @@
 		</h1>
 		<div>
 			<ul>
-				<li><a href="home_page.php"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+				<!-- <li><a href="home_page.php"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li> -->
 				<li><a href="customer_homepage.php"><i class="fa fa-desktop" aria-hidden="true"></i> Dashboard</a></li>
 				<li><a href="logout_handler.php"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
 			</ul>
@@ -45,7 +45,6 @@
         <h2>Change Address</h2>
 		<?php
 			echo "<form action=\"user_change_user_address_handler.php\" method=\"post\">";
-            echo "<p><strong>Package <strong></p>";
             echo "<table cellpadding=\"10\">";
             echo "<tr>";
             echo "<td class=\"fix_table_short\">Building Number</td>";
@@ -54,7 +53,7 @@
             echo "<td class=\"fix_table_short\">Province</td>";
             echo "</tr>";
             echo "<tr>";
-            echo "<td class=\"fix_table_short\"><input type=\"number\" name=\"building_num\" ></td>";
+            echo "<td class=\"fix_table_short\"><input type=\"number\" min=\"1\" max=\"9999\" name=\"building_num\" ></td>";
             echo "<td class=\"fix_table_short\"><input type=\"text\" name=\"community\" ></td>";
             echo "<td class=\"fix_table_short\"><input type=\"text\" name=\"city\" ></td>";
             echo "<td class=\"fix_table_short\"><input type=\"text\" name=\"province\" ></td>";

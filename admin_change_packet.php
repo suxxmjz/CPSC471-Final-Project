@@ -37,7 +37,7 @@
 		</h1>
 		<div>
 			<ul>
-				<li><a href="home_page.php"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+				<!-- <li><a href="home_page.php"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li> -->
 				<li><a href="admin_homepage.php"><i class="fa fa-desktop" aria-hidden="true"></i> Dashboard</a></li>
 				<li><a href="logout_handler.php"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
 			</ul>
@@ -53,7 +53,7 @@
             echo "<td class=\"fix_table_short\">Package Sender</td>";	
             echo "</tr>";
             echo "<tr>";
-            echo "<td class=\"fix_table_short\"><input type=\"number\" name=\"package_weight\" ></td>";
+            echo "<td class=\"fix_table_short\"><input type=\"number\"min=\"1\" max=\"99\" name=\"package_weight\" ></td>";
             echo "<td class=\"fix_table_short\"><input type=\"text\" name=\"package_receiver\" ></td>";
             echo "<td class=\"fix_table_short\"><input type=\"text\" name=\"package_sender\" ></td>";
             echo "<td class=\"fix_table_short\">";
@@ -64,4 +64,4 @@
             echo "</form>";     
                 ?>
             </body>
-</html>a
+</html>

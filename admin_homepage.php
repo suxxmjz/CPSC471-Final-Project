@@ -37,6 +37,10 @@
 				</td>
 			</tr>
 			<tr>
+				<td class="admin_func"><a href="admin_cancel_booked_tickets.php"><i class="fa fa-plane" aria-hidden="true"></i> Cancel Booked Ticket</a>
+				</td>
+			</tr>
+			<tr>
 				<td class="admin_func"><a href="view_flight_details.php"><i class="fa fa-plane" aria-hidden="true"></i> View Flight Schedule Details</a>
 				</td>
 			</tr>
