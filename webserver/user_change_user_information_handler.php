@@ -73,7 +73,7 @@
                 if (!empty($newEml)) {
                     $query="SELECT count(*) FROM user WHERE UserEmail = ?";
                     $stmt=mysqli_prepare($dbc,$query);
-                    mysqli_stmt_bind_param($stmt,"s",$user_name);
+                    mysqli_stmt_bind_param($stmt,"s",$newEml);
                     mysqli_stmt_execute($stmt);
                     mysqli_stmt_bind_result($stmt,$exists);
                     mysqli_stmt_fetch($stmt);
@@ -115,7 +115,7 @@
                 if (!empty($newEml)) {
                     $query="SELECT count(*) FROM user WHERE UserEmail = ?";
                     $stmt=mysqli_prepare($dbc,$query);
-                    mysqli_stmt_bind_param($stmt,"s",$user_name);
+                    mysqli_stmt_bind_param($stmt,"s",$newEml);
                     mysqli_stmt_execute($stmt);
                     mysqli_stmt_bind_result($stmt,$exists);
                     mysqli_stmt_fetch($stmt);
