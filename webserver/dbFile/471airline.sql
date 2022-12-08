@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 07, 2022 at 03:37 AM
--- Server version: 10.4.27-MariaDB
+-- Generation Time: Dec 08, 2022 at 04:09 AM
+-- Server version: 8.0.28
 -- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -28,9 +28,9 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `admin` (
-  `AdminEmail` varchar(20) NOT NULL,
-  `AdminName` varchar(20) NOT NULL,
-  `AdminPassword` varchar(20) NOT NULL
+  `AdminEmail` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `AdminName` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `AdminPassword` varchar(20) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -47,11 +47,11 @@ INSERT INTO `admin` (`AdminEmail`, `AdminName`, `AdminPassword`) VALUES
 --
 
 CREATE TABLE `airport` (
-  `AirportName` varchar(20) NOT NULL,
-  `Zones` int(1) NOT NULL,
-  `Province` varchar(20) NOT NULL,
-  `City` varchar(20) NOT NULL,
-  `ZIP` varchar(6) NOT NULL
+  `AirportName` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `Zones` int NOT NULL,
+  `Province` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `City` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `ZIP` varchar(6) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -71,13 +71,21 @@ INSERT INTO `airport` (`AirportName`, `Zones`, `Province`, `City`, `ZIP`) VALUES
 --
 
 CREATE TABLE `customer` (
-  `CustomerEmail` varchar(20) NOT NULL,
-  `PhoneNumber` int(10) NOT NULL,
-  `Province` varchar(20) NOT NULL,
-  `City` varchar(20) NOT NULL,
-  `BuildingNum` int(4) NOT NULL,
-  `Community` varchar(20) NOT NULL
+  `CustomerEmail` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `PhoneNumber` bigint NOT NULL,
+  `Province` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `City` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `BuildingNum` int NOT NULL,
+  `Community` varchar(20) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `customer`
+--
+
+INSERT INTO `customer` (`CustomerEmail`, `PhoneNumber`, `Province`, `City`, `BuildingNum`, `Community`) VALUES
+('jason.wu1@ucalgary.ca', 4034445555, 'Alberta', 'Calgary', 2222, 'Some Street'),
+('jason.wu4325@gmail.com', 4035541892, 'Alberta', 'Calgary', 3000, 'Somewhere');
 
 -- --------------------------------------------------------
 
@@ -86,13 +94,13 @@ CREATE TABLE `customer` (
 --
 
 CREATE TABLE `flight` (
-  `FlightNumber` int(10) NOT NULL,
+  `FlightNumber` int NOT NULL,
   `DepTime` date NOT NULL,
   `StartTime` time NOT NULL,
   `EndTime` time NOT NULL,
-  `Destination` varchar(20) NOT NULL,
-  `Source` varchar(20) NOT NULL,
-  `GateNumber` int(1) DEFAULT NULL
+  `Destination` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `Source` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `GateNumber` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -100,7 +108,20 @@ CREATE TABLE `flight` (
 --
 
 INSERT INTO `flight` (`FlightNumber`, `DepTime`, `StartTime`, `EndTime`, `Destination`, `Source`, `GateNumber`) VALUES
-(765, '2022-12-13', '05:00:00', '13:00:00', 'Vancouver Airport', 'Calgary Airport', 3);
+(1239, '2022-12-09', '07:50:00', '21:50:00', 'Vancouver Airport', 'Calgary Airport', 2),
+(1240, '2022-12-09', '22:50:00', '12:50:00', 'Vancouver Airport', 'Calgary Airport', 2),
+(1241, '2022-12-09', '15:50:00', '05:51:00', 'Vancouver Airport', 'Calgary Airport', 2),
+(1242, '2022-12-09', '07:51:00', '09:51:00', 'Vancouver Airport', 'Calgary Airport', 1),
+(1243, '2022-12-09', '21:51:00', '23:51:00', 'Vancouver Airport', 'Calgary Airport', 1),
+(1244, '2022-12-09', '15:51:00', '17:51:00', 'Vancouver Airport', 'Calgary Airport', 1),
+(1245, '2022-12-09', '20:52:00', '23:52:00', 'Toronto Airport', 'Calgary Airport', 2),
+(1246, '2022-12-09', '15:52:00', '19:52:00', 'Toronto Airport', 'Calgary Airport', 2),
+(1247, '2022-12-09', '07:52:00', '11:52:00', 'Toronto Airport', 'Calgary Airport', 2),
+(1248, '2022-12-09', '16:53:00', '20:53:00', 'Toronto Airport', 'Calgary Airport', 2),
+(1249, '2022-12-09', '19:54:00', '00:54:00', 'Calgary Airport', 'Montreal Airport', 2),
+(1250, '2022-12-09', '08:55:00', '01:55:00', 'Calgary Airport', 'Montreal Airport', 2),
+(1251, '2022-12-09', '15:55:00', '20:55:00', 'Calgary Airport', 'Montreal Airport', 2),
+(1252, '2022-12-09', '10:55:00', '15:55:00', 'Calgary Airport', 'Montreal Airport', 1);
 
 -- --------------------------------------------------------
 
@@ -109,9 +130,9 @@ INSERT INTO `flight` (`FlightNumber`, `DepTime`, `StartTime`, `EndTime`, `Destin
 --
 
 CREATE TABLE `gate` (
-  `GateNumber` int(1) NOT NULL,
-  `AirportName` varchar(20) NOT NULL,
-  `Zone` int(1) NOT NULL
+  `GateNumber` int NOT NULL,
+  `AirportName` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `Zone` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -120,16 +141,16 @@ CREATE TABLE `gate` (
 
 INSERT INTO `gate` (`GateNumber`, `AirportName`, `Zone`) VALUES
 (1, 'Calgary Airport', 1),
-(1, 'Montreal Airport', 1),
-(1, 'Toronto Airport', 1),
-(1, 'Vancouver Airport', 1),
 (2, 'Calgary Airport', 1),
+(1, 'Montreal Airport', 1),
 (2, 'Montreal Airport', 1),
+(1, 'Toronto Airport', 1),
 (2, 'Toronto Airport', 1),
-(2, 'Vancouver Airport', 1),
 (3, 'Toronto Airport', 2),
-(3, 'Vancouver Airport', 2),
 (4, 'Toronto Airport', 2),
+(1, 'Vancouver Airport', 1),
+(2, 'Vancouver Airport', 1),
+(3, 'Vancouver Airport', 2),
 (4, 'Vancouver Airport', 2);
 
 -- --------------------------------------------------------
@@ -139,11 +160,20 @@ INSERT INTO `gate` (`GateNumber`, `AirportName`, `Zone`) VALUES
 --
 
 CREATE TABLE `package` (
-  `PackageID` int(10) NOT NULL,
-  `Weight` int(2) NOT NULL,
-  `ReceiverName` varchar(20) NOT NULL,
-  `SenderName` varchar(20) NOT NULL
+  `PackageID` int NOT NULL,
+  `Weight` int NOT NULL,
+  `ReceiverName` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `SenderName` varchar(20) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `package`
+--
+
+INSERT INTO `package` (`PackageID`, `Weight`, `ReceiverName`, `SenderName`) VALUES
+(9, 50, 'Someone', 'Jason'),
+(10, 50, 'Cool', 'Someone'),
+(11, 60, 'Else', 'Someone');
 
 -- --------------------------------------------------------
 
@@ -152,10 +182,24 @@ CREATE TABLE `package` (
 --
 
 CREATE TABLE `passenger` (
-  `PassengerID` varchar(10) NOT NULL,
-  `PassengerName` varchar(20) NOT NULL,
-  `PassengerAge` int(2) NOT NULL
+  `PassengerID` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
+  `PassengerName` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `PassengerAge` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `passenger`
+--
+
+INSERT INTO `passenger` (`PassengerID`, `PassengerName`, `PassengerAge`) VALUES
+('123', 'Brother', 24),
+('12345', 'Jason', 21),
+('123456', 'Sukriti', 20),
+('1234567', 'Caroline', 20),
+('1345', 'Someone', 22),
+('2342354', 'Jay', 21),
+('4325', 'Jason', 21),
+('5435', 'Someone2', 20);
 
 -- --------------------------------------------------------
 
@@ -164,10 +208,23 @@ CREATE TABLE `passenger` (
 --
 
 CREATE TABLE `seat` (
-  `SeatNumber` int(2) NOT NULL,
-  `FlightNumber` int(10) NOT NULL,
-  `PassengerID` varchar(10) NOT NULL
+  `SeatNumber` int NOT NULL,
+  `FlightNumber` int NOT NULL,
+  `PassengerID` varchar(10) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `seat`
+--
+
+INSERT INTO `seat` (`SeatNumber`, `FlightNumber`, `PassengerID`) VALUES
+(4, 1239, '123'),
+(1, 1239, '12345'),
+(2, 1239, '123456'),
+(3, 1239, '1234567'),
+(8, 1239, '1345'),
+(13, 1239, '2342354'),
+(9, 1239, '5435');
 
 -- --------------------------------------------------------
 
@@ -176,10 +233,26 @@ CREATE TABLE `seat` (
 --
 
 CREATE TABLE `ticket` (
-  `TicketID` int(10) NOT NULL,
-  `FlightNumber` int(10) NOT NULL,
-  `CustomerEmail` varchar(20) NOT NULL
+  `TicketID` int NOT NULL,
+  `FlightNumber` int NOT NULL,
+  `CustomerEmail` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ticket`
+--
+
+INSERT INTO `ticket` (`TicketID`, `FlightNumber`, `CustomerEmail`) VALUES
+(50, 1239, 'jason.wu4325@gmail.com'),
+(51, 1239, 'jason.wu4325@gmail.com'),
+(52, 1239, 'jason.wu4325@gmail.com'),
+(53, 1245, 'jason.wu4325@gmail.com'),
+(54, 1239, 'jason.wu4325@gmail.com'),
+(55, 1239, 'jason.wu4325@gmail.com'),
+(56, 1239, 'jason.wu4325@gmail.com'),
+(57, 1239, 'jason.wu1@ucalgary.ca'),
+(58, 1246, 'jason.wu1@ucalgary.ca'),
+(59, 1245, 'jason.wu1@ucalgary.ca');
 
 -- --------------------------------------------------------
 
@@ -188,10 +261,26 @@ CREATE TABLE `ticket` (
 --
 
 CREATE TABLE `tickettype` (
-  `PackageID` int(10) DEFAULT NULL,
-  `TicketID` int(10) NOT NULL,
-  `PassengerID` varchar(10) DEFAULT NULL
+  `PackageID` int DEFAULT NULL,
+  `TicketID` int NOT NULL,
+  `PassengerID` varchar(10) COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tickettype`
+--
+
+INSERT INTO `tickettype` (`PackageID`, `TicketID`, `PassengerID`) VALUES
+(NULL, 50, '12345'),
+(NULL, 51, '123456'),
+(NULL, 52, '1234567'),
+(9, 53, NULL),
+(NULL, 54, '123'),
+(NULL, 55, '1345'),
+(NULL, 56, '5435'),
+(NULL, 57, '2342354'),
+(10, 58, NULL),
+(11, 59, NULL);
 
 -- --------------------------------------------------------
 
@@ -200,9 +289,9 @@ CREATE TABLE `tickettype` (
 --
 
 CREATE TABLE `user` (
-  `UserEmail` varchar(20) NOT NULL,
-  `UserName` varchar(20) NOT NULL,
-  `UserPassword` varchar(20) NOT NULL
+  `UserEmail` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `UserName` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `UserPassword` varchar(20) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -210,8 +299,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`UserEmail`, `UserName`, `UserPassword`) VALUES
-('abcd@gmail.com', 'a', 'b'),
-('abcde@gmail.com', 'a', 'c');
+('jason.wu1@ucalgary.ca', 'Jason2', 'Password'),
+('jason.wu4325@gmail.com', 'Jason', 'Password');
 
 --
 -- Indexes for dumped tables
@@ -301,19 +390,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `flight`
 --
 ALTER TABLE `flight`
-  MODIFY `FlightNumber` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1238;
+  MODIFY `FlightNumber` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1253;
 
 --
 -- AUTO_INCREMENT for table `package`
 --
 ALTER TABLE `package`
-  MODIFY `PackageID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `PackageID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `ticket`
 --
 ALTER TABLE `ticket`
-  MODIFY `TicketID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `TicketID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- Constraints for dumped tables
@@ -329,8 +418,8 @@ ALTER TABLE `customer`
 -- Constraints for table `flight`
 --
 ALTER TABLE `flight`
-  ADD CONSTRAINT `flight_ibfk_1` FOREIGN KEY (`Destination`) REFERENCES `airport` (`AirportName`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`Source`) REFERENCES `airport` (`AirportName`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `flight_ibfk_1` FOREIGN KEY (`Destination`) REFERENCES `gate` (`AirportName`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`Source`) REFERENCES `gate` (`AirportName`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`GateNumber`) REFERENCES `gate` (`GateNumber`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
